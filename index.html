@@ -77,16 +77,61 @@
     }
     @media(prefers-reduced-motion:reduce) { .needs-replenishment { animation:none; } }
   </style>
+  <style>
+    .public-requests-panel,.request-stats-panel { margin-bottom:24px; }
+    .section-hint { margin:7px 0 0; font-size:12px; line-height:1.6; color:var(--muted); }
+    .section-message { margin:16px 22px; color:var(--muted); font-size:13px; line-height:1.6; }
+    .section-message.error { color:#a92939; }
+    .public-request-scroll { max-height:288px; overflow:auto; }
+    .public-requests-table,.request-stats-table { width:100%; min-width:0; }
+    .public-requests-table th,.public-requests-table td,.request-stats-table th,.request-stats-table td { font-size:13px; padding:13px 22px; }
+    .public-requests-table th,.request-stats-table th { position:sticky; top:0; z-index:1; background:#f8faff; }
+    .public-requests-table td:nth-child(3),.request-stats-table td:nth-child(3),.request-stats-table td:nth-child(4) { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .public-requests-table td:last-child { font-size:12px; color:var(--muted); white-space:nowrap; }
+    .inventory-expand-wrap { padding:12px 20px 18px; border-top:1px solid var(--line); }
+    .inventory-expand-button { width:100%; font-size:13px; padding:11px; }
+    .request-stat-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; padding:0 22px 22px; }
+    .request-stat-card { border:1px solid var(--line); border-radius:10px; padding:18px; background:#fbfcfe; }
+    .request-stat-card h3 { margin:0 0 12px; font-size:14px; font-weight:700; }
+    .request-stat-card strong { display:block; font-size:28px; line-height:1.1; letter-spacing:-1px; color:var(--navy); font-variant-numeric:tabular-nums; }
+    .request-stat-card strong small { font-size:13px; margin-left:4px; font-weight:600; }
+    .request-stat-card p { margin:9px 0 0; font-size:12px; color:var(--muted); }
+    .request-stat-track { height:5px; margin-top:14px; background:#e3ebf7; border-radius:9px; overflow:hidden; }
+    .request-stat-track span { display:block; height:100%; background:#1463e8; border-radius:9px; }
+    .request-stats-detail { max-height:360px; overflow:auto; border-top:1px solid var(--line); }
+    .request-stats-table td:nth-child(1) { width:120px; color:var(--muted); }
+    .unclassified-note { margin:0 22px 18px; padding:12px 14px; background:#fff7e8; color:#8d601d; font-size:12px; line-height:1.6; border-radius:8px; }
+    @media(max-width:800px) {
+      .request-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:0 16px 16px; }
+      .public-requests-table { min-width:500px; }
+      .request-stats-table { min-width:470px; }
+      .public-requests-table th,.public-requests-table td,.request-stats-table th,.request-stats-table td { padding:12px 16px; }
+      .public-requests-panel .panel-head,.request-stats-panel .panel-head { gap:14px; align-items:flex-start; }
+      .public-requests-panel .panel-head button,.request-stats-panel .panel-head button { flex-shrink:0; font-size:12px; }
+    }
+  </style>
 </head>
 <body><style>.panel:has(#saveSetting){display:none}</style>
   <header class="top"><div><div class="eyebrow">MARKETING OPERATIONS</div><h1>마케팅팀 자산 관리 사이트</h1><p>브로슈어 · 기념품 · 쇼핑백 · 패키지박스의 재고 현황 확인과 불출 신청</p></div><div class="date"><button class="admin-login-button" type="button" id="adminLoginButton" aria-haspopup="dialog" aria-controls="passwordModal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg>관리자</button><div id="today"></div><button class="ghost" type="button" id="resetPasswordsButton" hidden style="margin-top:9px">비밀번호 초기화</button></div></header>
   <main class="wrap" id="publicView">
+    <section class="panel public-requests-panel" aria-labelledby="publicRequestsTitle">
+      <div class="panel-head"><div><h2 id="publicRequestsTitle">불출 신청 내역</h2><p class="section-hint">최근 신청 20건 · 품목과 신청 수량을 확인하세요.</p></div><button type="button" class="ghost" id="refreshPublicRequests">새로고침</button></div>
+      <p class="section-message" id="publicRequestsMessage" role="status" aria-live="polite">신청 내역을 불러오는 중입니다.</p>
+      <div class="public-request-scroll" id="publicRequestsList"></div>
+    </section>
     <div class="monitor-heading"><div><h2>마케팅 자산 재고 현황</h2><p>품목명을 누르면 이미지를 볼 수 있습니다. 필요한 수량은 불출 신청으로 접수해 주세요.</p></div><button type="button" class="ghost" id="refreshPublic">새로고침</button></div>
     <p class="monitor-message" id="publicMessage" role="status" aria-live="polite">재고 정보를 불러오는 중입니다.</p>
     <div class="monitor-grid" id="monitorGrid"></div>
   </main>
   <main class="wrap" id="adminView" hidden>
     <div class="admin-heading"><div><h2>관리자 재고 관리</h2><p id="adminIdentity"></p></div><div class="admin-actions"><button class="ghost" type="button" id="showPublic">모니터링 화면</button><button class="ghost" type="button" id="logoutAdmin">로그아웃</button></div></div>
+    <section class="panel request-stats-panel" aria-labelledby="requestStatsTitle">
+      <div class="panel-head"><div><h2 id="requestStatsTitle">인벤토리별 신청 수량 통계</h2><p class="section-hint">전체 기간 누적 신청 기준 · 실제 불출 수량과 별도로 집계합니다.</p></div><button type="button" class="ghost" id="refreshRequestStats">통계 새로고침</button></div>
+      <p class="section-message" id="requestStatsMessage" role="status" aria-live="polite">관리자 로그인 후 통계를 확인할 수 있습니다.</p>
+      <div class="request-stat-grid" id="requestStatsCards"></div>
+      <p class="unclassified-note" id="requestStatsUnclassified" hidden></p>
+      <div class="request-stats-detail" id="requestStatsDetails"></div>
+    </section>
     <section class="panel requests-panel"><div class="panel-head"><h2>불출 신청 내역</h2><button class="ghost" type="button" id="refreshRequests">새로고침</button></div><p class="request-guide">접수된 신청을 확인한 뒤 기존 입출고 등록에서 실제 불출 수량을 반영해 주세요. 신청만으로 재고가 차감되지는 않습니다.</p><div id="requestList" class="request-list"></div></section>
     <section class="stats"><div class="stat"><span>관리 품목</span><strong id="itemCount">0개</strong></div><div class="stat"><span>보충 필요 품목</span><strong class="red" id="lowCount">0개</strong><span class="low-names" id="lowNames">현재 보충 필요 품목이 없습니다.</span></div></section>
     <section class="workspace"><aside class="sidebar"><div class="panel"><div class="panel-head"><h2>입출고 등록</h2></div><form class="form" id="transactionForm"><label for="transactionType">처리 구분</label><select id="transactionType"><option value="불출">불출</option><option value="입고">입고</option></select><label for="product">품목</label><select id="product"></select><div class="row"><div><label for="amount"><span id="amountLabel">불출</span> 수량</label><input id="amount" type="number" min="1" value="1" required></div><div><label for="recipient" id="partyLabel">불출처</label><input id="recipient" placeholder="예: 영업1팀" required></div></div><label for="memo">메모 (선택)</label><input id="memo" placeholder="예: 7월 고객 미팅"><button type="submit" id="transactionButton" style="width:100%">불출 반영하기</button></form></div>
@@ -234,6 +279,8 @@
       db.channel('marketing-inventory').on('postgres_changes',{event:'*',schema:'public',table:'inventory_items'},refreshAdmin).on('postgres_changes',{event:'*',schema:'public',table:'inventory_logs'},refreshAdmin).subscribe();
     }
 
+    let brochuresExpanded=false;
+    let publicRequestsLoading=false,publicRequestRows=null,publicRequestsLoadedAt=null,statsGeneration=0;
     let publicStocks=[], publicLoaded=false, publicLoading=false, publicFresh=false, publicUpdatedAt=null;
     let selectedImageId=null, requestItemId=null, requestKey=null, requestBusy=false, imageBusy=false;
     const modalReturnTargets=new Map();
@@ -243,22 +290,24 @@
     }
     function showPublicView(){
       $('#adminView').hidden=true;$('#publicView').hidden=false;$('#resetPasswordsButton').hidden=true;
-      loadPublicInventory();
+      loadPublicInventory();loadPublicRequests();
     }
     function showAdminView(){
       if(!requireAdmin())return;
       $('#publicView').hidden=true;$('#adminView').hidden=false;
       $('#adminIdentity').textContent=currentAdmin.name+' 관리자 · 품목명을 눌러 이미지를 등록할 수 있습니다.';
       $('#resetPasswordsButton').hidden=!!db||currentAdmin.email!=='hseo@sgacorp.kr';
-      render();loadIssueRequests();
+      render();refreshAdminRequests();
     }
     function renderPublic(){
       $('#monitorGrid').innerHTML=categoryOrder.map((category,index)=>{
         const items=publicStocks.filter(item=>item.category===category);
         const total=publicLoaded?items.reduce((sum,item)=>sum+item.qty,0).toLocaleString():'—';
-        const rows=items.map(item=>'<tr><td><button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button></td><td class="qty">'+item.qty.toLocaleString()+'개</td><td><button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button></td></tr>').join('');
+        const visibleItems=category==='브로슈어'&&!brochuresExpanded?items.slice(0,5):items;
+        const rows=visibleItems.map(item=>'<tr><td><button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button></td><td class="qty">'+item.qty.toLocaleString()+'개</td><td><button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button></td></tr>').join('');
+        const expandControl=category==='브로슈어'&&items.length>5?'<div class="inventory-expand-wrap"><button type="button" class="ghost inventory-expand-button" id="toggleBrochures" aria-expanded="'+brochuresExpanded+'" aria-controls="monitorItems'+index+'">'+(brochuresExpanded?'접기 · 5개만 보기':'펼쳐보기 · 나머지 '+(items.length-5)+'개')+'</button></div>':'';
         const emptyText=publicLoaded?'등록된 품목이 없습니다.':publicLoading?'재고 확인 중…':'재고 정보를 확인할 수 없습니다.';
-        return '<section class="monitor-card" aria-labelledby="categoryTitle'+index+'"><div class="monitor-card-head"><div><span class="category-label">INVENTORY / 0'+(index+1)+'</span><h3 id="categoryTitle'+index+'">'+esc(category)+'</h3></div><div class="category-total"><strong>'+total+'</strong><span>총 보유 수량 · 개</span></div></div>'+(items.length?'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="empty-category">'+emptyText+'</div>')+'</section>';
+        return '<section class="monitor-card" aria-labelledby="categoryTitle'+index+'"><div class="monitor-card-head"><div><span class="category-label">INVENTORY / 0'+(index+1)+'</span><h3 id="categoryTitle'+index+'">'+esc(category)+'</h3></div><div class="category-total"><strong>'+total+'</strong><span>총 보유 수량 · 개</span></div></div>'+(items.length?'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody id="monitorItems'+index+'">'+rows+'</tbody></table>':'<div class="empty-category">'+emptyText+'</div>')+expandControl+'</section>';
       }).join('');
       const time=publicUpdatedAt?'조회: '+publicUpdatedAt.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}):'';
       if(!$('#publicView').hidden)$('#today').textContent=formatDate(new Date())+(time?' | '+time:'');
@@ -373,7 +422,7 @@
         $('#issueRequestForm').hidden=true;$('#issueRequestSuccess').hidden=false;
         $('#issueReceipt').textContent=item.name+' '+quantity.toLocaleString()+'개 · 접수번호 '+String(data).slice(0,8)+' · 담당자 확인 후 불출됩니다.';
         $('#issueRequestSuccess button').focus();
-        if(currentAdmin)loadIssueRequests();
+        loadPublicRequests();if(currentAdmin)refreshAdminRequests();
       }catch(error){
         const code=error.code||'';
         $('#issueRequestError').textContent=/PGRST202|42883|42501|42P01/.test(code)?'신청 접수 기능의 연결 설정이 필요합니다. 관리자에게 문의해 주세요.':(error.message||'접수에 실패했습니다. 입력 내용을 유지한 채 다시 시도해 주세요.');
@@ -391,14 +440,98 @@
         $('#requestList').innerHTML=data?.length?data.map(row=>'<div class="request-entry"><b>'+esc(row.item_name)+' · '+Number(row.quantity).toLocaleString()+'개</b><br>'+esc(row.requester_name)+' · '+esc(row.requester_team)+'<br>'+esc(row.purpose)+'<br><span>'+esc(new Date(row.created_at).toLocaleString('ko-KR'))+' · 접수번호 '+esc(String(row.id).slice(0,8))+'</span></div>').join(''):'<p class="request-guide">접수된 불출 신청이 없습니다.</p>';
       }catch(error){if(currentAdmin===signedAdmin)$('#requestList').textContent='신청 내역을 불러오지 못했습니다. 추가 설정 SQL 실행 여부를 확인해 주세요. '+(error.message||'');}
     }
+
+    function requestDateText(value){
+      const date=new Date(value);
+      return Number.isNaN(date.getTime())?'—':date.toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    }
+    function countValue(value){
+      const count=Number(value);
+      if(!Number.isSafeInteger(count)||count<0)throw new Error('신청 통계 수량을 확인할 수 없습니다.');
+      return count;
+    }
+    function renderPublicRequests(){
+      if(publicRequestRows===null){$('#publicRequestsList').innerHTML='';return;}
+      if(!publicRequestRows.length){$('#publicRequestsList').innerHTML='<p class="section-message">접수된 불출 신청이 없습니다.</p>';return;}
+      $('#publicRequestsList').innerHTML='<table class="public-requests-table"><thead><tr><th scope="col">인벤토리</th><th scope="col">품목</th><th scope="col">신청 수량</th><th scope="col">신청 시각</th></tr></thead><tbody>'+publicRequestRows.map(row=>'<tr><td>'+esc(row.category)+'</td><td>'+esc(row.name)+'</td><td><strong>'+row.quantity.toLocaleString()+'개</strong></td><td>'+esc(requestDateText(row.created_at))+'</td></tr>').join('')+'</tbody></table>';
+    }
+    async function loadPublicRequests(){
+      if(publicRequestsLoading)return;
+      publicRequestsLoading=true;$('#refreshPublicRequests').disabled=true;
+      const message=$('#publicRequestsMessage');
+      if(publicRequestRows===null)message.textContent='신청 내역을 불러오는 중입니다.';
+      message.hidden=false;
+      try{
+        if(!db)throw new Error('공동 신청 내역에 연결하지 못했습니다.');
+        const {data,error}=await db.rpc('inventory_recent_requests_v1');
+        if(error)throw error;
+        if(!Array.isArray(data))throw new Error('신청 내역 응답을 확인할 수 없습니다.');
+        publicRequestRows=data.map(row=>({name:String(row.item_name),category:row.item_category||'분류 확인 필요',quantity:countValue(row.quantity),created_at:row.created_at}));
+        publicRequestsLoadedAt=new Date();
+        renderPublicRequests();message.classList.remove('error');
+        message.textContent='최근 '+publicRequestRows.length+'건 · '+publicRequestsLoadedAt.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Seoul'})+' 조회';
+        message.hidden=!publicRequestRows.length;
+      }catch(error){
+        message.classList.add('error');message.hidden=false;
+        message.textContent=publicRequestRows===null?'신청 내역을 불러오지 못했습니다. 새로고침하거나 관리자에게 문의해 주세요.':'신청 내역 갱신이 지연되어 이전 조회 내역을 표시하고 있습니다.';
+      }finally{publicRequestsLoading=false;$('#refreshPublicRequests').disabled=false;}
+    }
+    function renderRequestStats(rows){
+      const ready=Array.isArray(rows);
+      const summaries=categoryOrder.map(category=>{
+        const matching=ready?rows.filter(row=>row.category===category):[];
+        return {category,quantity:matching.reduce((sum,row)=>sum+row.requested_quantity,0),count:matching.reduce((sum,row)=>sum+row.request_count,0)};
+      });
+      const maximum=Math.max(1,...summaries.map(row=>row.quantity));
+      $('#requestStatsCards').innerHTML=summaries.map(row=>'<div class="request-stat-card"><h3>'+esc(row.category)+'</h3><strong>'+(ready?row.quantity.toLocaleString():'—')+'<small>개</small></strong><p>'+(ready?'신청 '+row.count.toLocaleString()+'건':'집계 대기')+'</p><div class="request-stat-track" aria-hidden="true"><span style="width:'+(ready?Math.round(row.quantity/maximum*100):0)+'%"></span></div></div>').join('');
+      const unknown=ready?rows.filter(row=>!categoryOrder.includes(row.category)):[];
+      $('#requestStatsUnclassified').hidden=!unknown.length;
+      $('#requestStatsUnclassified').textContent=unknown.length?'분류 확인 필요: '+unknown.reduce((sum,row)=>sum+row.requested_quantity,0).toLocaleString()+'개 · '+unknown.reduce((sum,row)=>sum+row.request_count,0).toLocaleString()+'건. 삭제된 품목 등 분류를 확인할 수 없는 과거 신청도 아래 상세에 포함합니다.':'';
+      if(!ready){$('#requestStatsDetails').innerHTML='';return;}
+      if(!rows.length){$('#requestStatsDetails').innerHTML='<p class="section-message">집계할 불출 신청이 없습니다.</p>';return;}
+      const order=category=>{const index=categoryOrder.indexOf(category);return index<0?categoryOrder.length:index;};
+      const sorted=[...rows].sort((a,b)=>order(a.category)-order(b.category)||b.requested_quantity-a.requested_quantity||a.item_name.localeCompare(b.item_name,'ko-KR'));
+      $('#requestStatsDetails').innerHTML='<table class="request-stats-table"><thead><tr><th scope="col">인벤토리</th><th scope="col">품목</th><th scope="col">누적 신청 수량</th><th scope="col">신청 건수</th></tr></thead><tbody>'+sorted.map(row=>'<tr><td>'+esc(categoryOrder.includes(row.category)?row.category:'분류 확인 필요')+'</td><td>'+esc(row.item_name)+'</td><td><strong>'+row.requested_quantity.toLocaleString()+'개</strong></td><td>'+row.request_count.toLocaleString()+'건</td></tr>').join('')+'</tbody></table>';
+    }
+    function clearRequestStats(){
+      statsGeneration++;renderRequestStats(null);
+      $('#requestStatsMessage').textContent='관리자 로그인 후 통계를 확인할 수 있습니다.';
+      $('#requestStatsMessage').classList.remove('error');$('#refreshRequestStats').disabled=false;
+    }
+    async function loadRequestStats(){
+      if(!currentAdmin)return;
+      const signedAdmin=currentAdmin,generation=++statsGeneration;
+      $('#refreshRequestStats').disabled=true;$('#requestStatsMessage').classList.remove('error');
+      $('#requestStatsMessage').textContent='전체 신청 기록을 집계하는 중입니다.';
+      try{
+        if(!db)throw new Error('공동 신청 통계는 Supabase 연결 후 사용할 수 있습니다.');
+        const {data,error}=await db.rpc('inventory_request_stats_v1');
+        if(error)throw error;
+        if(!Array.isArray(data))throw new Error('통계 응답 형식을 확인할 수 없습니다.');
+        const rows=data.map(row=>({category:row.category||'미분류',item_id:String(row.item_id),item_name:String(row.item_name),requested_quantity:countValue(row.requested_quantity),request_count:countValue(row.request_count)}));
+        if(currentAdmin!==signedAdmin||generation!==statsGeneration)return;
+        renderRequestStats(rows);
+        const totalQuantity=rows.reduce((sum,row)=>sum+row.requested_quantity,0),totalCount=rows.reduce((sum,row)=>sum+row.request_count,0);
+        $('#requestStatsMessage').textContent='전체 기간 · '+totalCount.toLocaleString()+'건 신청 · 누적 '+totalQuantity.toLocaleString()+'개';
+      }catch(error){
+        if(currentAdmin!==signedAdmin||generation!==statsGeneration)return;
+        renderRequestStats(null);$('#requestStatsMessage').classList.add('error');
+        $('#requestStatsMessage').textContent='신청 통계를 불러오지 못했습니다. 최신 SQL 실행 여부를 확인해 주세요. '+(error.message||'');
+      }finally{if(generation===statsGeneration)$('#refreshRequestStats').disabled=false;}
+    }
+    function refreshAdminRequests(){return Promise.allSettled([loadIssueRequests(),loadRequestStats()]);}
+
     $('#monitorGrid').addEventListener('click',event=>{
+      if(event.target.closest('#toggleBrochures')){brochuresExpanded=!brochuresExpanded;renderPublic();$('#toggleBrochures')?.focus();return;}
       const imageButton=event.target.closest('[data-image-id]'),requestButton=event.target.closest('[data-request-id]');
       if(imageButton)openItemImage(imageButton.dataset.imageId);
       if(requestButton&&!requestButton.disabled)openIssueRequest(requestButton.dataset.requestId);
     });
     $('#stockTable').addEventListener('click',event=>{const button=event.target.closest('[data-image-id]');if(button&&requireAdmin())openItemImage(button.dataset.imageId,true);});
-    $('#refreshPublic').addEventListener('click',loadPublicInventory);
-    $('#refreshRequests').addEventListener('click',loadIssueRequests);
+    $('#refreshPublic').addEventListener('click',()=>{loadPublicInventory();loadPublicRequests();});
+    $('#refreshPublicRequests').addEventListener('click',loadPublicRequests);
+    $('#refreshRequestStats').addEventListener('click',loadRequestStats);
+    $('#refreshRequests').addEventListener('click',refreshAdminRequests);
     $('#showPublic').addEventListener('click',showPublicView);
     $('#closeLogin').addEventListener('click',()=>closeDialog('passwordModal'));
     $('#logoutAdmin').addEventListener('click',async()=>{
@@ -406,7 +539,7 @@
         await syncQueue;
         if(db){const {error}=await db.auth.signOut();if(error)throw error;}
         currentAdmin=null;logs=[];if(cloudConfigured)stocks=[];
-        $('#requestList').textContent='';$('#logs').textContent='';
+        $('#requestList').textContent='';$('#logs').textContent='';clearRequestStats();
         showPublicView();toast('로그아웃했습니다.');
       }catch(error){toast('로그아웃에 실패했습니다. '+error.message);}
     });
@@ -438,16 +571,16 @@
       if(event==='SIGNED_OUT'){
         currentAdmin=null;logs=[];stocks=[];
         $('#adminView').hidden=true;$('#publicView').hidden=false;$('#resetPasswordsButton').hidden=true;
-        $('#requestList').textContent='';$('#logs').textContent='';
+        $('#requestList').textContent='';$('#logs').textContent='';clearRequestStats();
         for(const id of ['correctionModal','quantityModal','replenishmentModal','imageModal'])$('#'+id).classList.add('hidden');
       }
     });
     async function bootstrap(){
-      render();updateTransactionMode();setupPasswordModal();
+      render();renderRequestStats(null);updateTransactionMode();setupPasswordModal();
       $('#passwordModal').classList.add('hidden');$('#adminView').hidden=true;$('#publicView').hidden=false;
-      await loadPublicInventory();
-      setInterval(()=>{if(!document.hidden&&!$('#publicView').hidden)loadPublicInventory();},30000);
-      setInterval(()=>{if(!document.hidden&&currentAdmin&&!$('#adminView').hidden)loadIssueRequests();},30000);
+      await Promise.allSettled([loadPublicInventory(),loadPublicRequests()]);
+      setInterval(()=>{if(!document.hidden&&!$('#publicView').hidden){loadPublicInventory();loadPublicRequests();}},30000);
+      setInterval(()=>{if(!document.hidden&&currentAdmin&&!$('#adminView').hidden)refreshAdminRequests();},30000);
     }
     bootstrap();
 
