@@ -112,6 +112,28 @@
     .request-stats-detail { max-height:360px; overflow:auto; border-top:1px solid var(--line); }
     .request-stats-table td:nth-child(1) { width:120px; color:var(--muted); }
     .unclassified-note { margin:0 22px 18px; padding:12px 14px; background:#fff7e8; color:#8d601d; font-size:12px; line-height:1.6; border-radius:8px; }
+    .lookup-panel { margin:0 0 24px; }
+    .lookup-form { display:grid; grid-template-columns:1.2fr 1fr auto; gap:10px; padding:18px 22px; align-items:end; }
+    .lookup-form label,.teams-setting label { display:block; font-size:12px; color:var(--muted); font-weight:750; margin:0 0 7px; }
+    .lookup-form input,.teams-setting input,.request-filter { width:100%; border:1px solid #d9e1ec; border-radius:8px; padding:10px 11px; font:inherit; background:#fff; }
+    .lookup-result { margin:0 22px 18px; padding:15px 16px; background:#f5f8fd; border-radius:9px; font-size:13px; line-height:1.7; }
+    .status-badge { display:inline-block; padding:5px 9px; border-radius:99px; font-size:11px; font-weight:800; }
+    .status-requested { background:#edf3fb; color:#315d91; }
+    .status-approved { background:#e5f7f0; color:#087d56; }
+    .status-completed { background:#e8ecff; color:#4338a7; }
+    .status-rejected { background:#ffeaec; color:#bd2635; }
+    .teams-setting { margin:0 0 24px; padding:20px 22px; }
+    .teams-setting-grid { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; }
+    .teams-setting p { margin:0 0 16px; color:var(--muted); font-size:13px; line-height:1.65; }
+    .request-tools { display:flex; gap:8px; align-items:center; }
+    .request-filter { min-width:130px; }
+    .request-entry { position:relative; }
+    .request-entry-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+    .request-entry-actions { display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+    .request-entry-actions button { padding:7px 10px; font-size:12px; }
+    .request-entry-actions .reject-request { background:#ffeaec; color:#bd2635; }
+    .request-entry-actions .complete-request { background:#5c4ee5; }
+    .availability-note { display:block; margin-top:5px; color:var(--muted); font-size:10px; font-weight:600; }
     @media(max-width:800px) {
       .request-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:0 16px 16px; }
       .public-requests-table { min-width:500px; }
@@ -119,6 +141,8 @@
       .public-requests-table th,.public-requests-table td,.request-stats-table th,.request-stats-table td { padding:12px 16px; }
       .public-requests-panel .panel-head,.request-stats-panel .panel-head { gap:14px; align-items:flex-start; }
       .public-requests-panel .panel-head button,.request-stats-panel .panel-head button { flex-shrink:0; font-size:12px; }
+      .lookup-form,.teams-setting-grid { grid-template-columns:1fr; }
+      .request-tools { width:100%; justify-content:space-between; }
     }
   </style>
 </head>
@@ -130,20 +154,26 @@
       <p class="section-message" id="publicRequestsMessage" role="status" aria-live="polite">신청 내역을 불러오는 중입니다.</p>
       <div class="public-request-scroll" id="publicRequestsList"></div>
     </section>
+    <section class="panel lookup-panel" aria-labelledby="lookupTitle">
+      <div class="panel-head"><div><h2 id="lookupTitle">내 신청 진행 상황</h2><p class="section-hint">접수번호와 신청자 이메일로 승인·반려·불출 완료 상태를 확인합니다.</p></div></div>
+      <form class="lookup-form" id="requestLookupForm"><div><label for="lookupRequestId">접수번호</label><input id="lookupRequestId" autocomplete="off" placeholder="접수 완료 후 받은 전체 번호" required></div><div><label for="lookupEmail">신청자 이메일</label><input id="lookupEmail" type="email" autocomplete="email" placeholder="name@sgacorp.kr" required></div><button type="submit" id="lookupButton">조회</button></form>
+      <div class="lookup-result" id="lookupResult" hidden role="status"></div>
+    </section>
     <div class="monitor-heading"><div><h2>마케팅 자산 재고 현황</h2><p>품목명을 누르면 이미지를 볼 수 있습니다. 필요한 수량은 불출 신청으로 접수해 주세요.</p></div><button type="button" class="ghost" id="refreshPublic">새로고침</button></div>
     <p class="monitor-message" id="publicMessage" role="status" aria-live="polite">재고 정보를 불러오는 중입니다.</p>
     <div class="monitor-grid" id="monitorGrid"></div>
   </main>
   <main class="wrap" id="adminView" hidden>
     <div class="admin-heading"><div><h2>관리자 재고 관리</h2><p id="adminIdentity"></p></div><div class="admin-actions"><button class="ghost" type="button" id="showPublic">모니터링 화면</button><button class="ghost" type="button" id="logoutAdmin">로그아웃</button></div></div>
+    <section class="panel teams-setting"><h2>Teams 승인 알림</h2><p>승인 시 신청자의 이메일과 안내 문구를 Power Automate 워크플로에 전달합니다. 저장된 URL은 보안을 위해 다시 표시하지 않으며, 입력란을 비워 저장하면 연결을 해제합니다.</p><div class="teams-setting-grid"><div><label for="teamsApprovalWebhook">Power Automate HTTP 워크플로 URL</label><input id="teamsApprovalWebhook" type="url" placeholder="https://…" autocomplete="off"></div><button type="button" id="saveTeamsApprovalWebhook">설정 저장</button></div></section>
     <section class="panel request-stats-panel" aria-labelledby="requestStatsTitle">
-      <div class="panel-head"><div><h2 id="requestStatsTitle">인벤토리별 신청 수량 통계</h2><p class="section-hint">전체 기간 누적 신청 기준 · 실제 불출 수량과 별도로 집계합니다.</p></div><button type="button" class="ghost" id="refreshRequestStats">통계 새로고침</button></div>
+      <div class="panel-head"><div><h2 id="requestStatsTitle">인벤토리별 신청 수량 통계</h2><p class="section-hint">전체 기간 누적 신청 기준 · 반려 건은 제외합니다.</p></div><button type="button" class="ghost" id="refreshRequestStats">통계 새로고침</button></div>
       <p class="section-message" id="requestStatsMessage" role="status" aria-live="polite">관리자 로그인 후 통계를 확인할 수 있습니다.</p>
       <div class="request-stat-grid" id="requestStatsCards"></div>
       <p class="unclassified-note" id="requestStatsUnclassified" hidden></p>
       <div class="request-stats-detail" id="requestStatsDetails"></div>
     </section>
-    <section class="panel requests-panel"><div class="panel-head"><h2>불출 신청 내역</h2><button class="ghost" type="button" id="refreshRequests">새로고침</button></div><p class="request-guide">접수된 신청을 확인한 뒤 기존 입출고 등록에서 실제 불출 수량을 반영해 주세요. 신청만으로 재고가 차감되지는 않습니다.</p><div id="requestList" class="request-list"></div></section>
+    <section class="panel requests-panel"><div class="panel-head"><h2>불출 신청 내역</h2><div class="request-tools"><select id="requestStatusFilter" class="request-filter" aria-label="신청 상태 필터"><option value="all">전체 상태</option><option value="requested">접수</option><option value="approved">승인</option><option value="completed">불출 완료</option><option value="rejected">반려</option></select><button class="ghost" type="button" id="refreshRequests">새로고침</button></div></div><p class="request-guide">승인하면 신청 수량이 예약되고 Teams 알림이 전송됩니다. 불출 완료 시 실제 재고에서 차감됩니다.</p><div id="requestList" class="request-list"></div></section>
     <section class="stats"><div class="stat"><span>관리 품목</span><strong id="itemCount">0개</strong></div><div class="stat"><span>보충 필요 품목</span><strong class="red" id="lowCount">0개</strong><span class="low-names" id="lowNames">현재 보충 필요 품목이 없습니다.</span></div></section>
     <section class="workspace"><aside class="sidebar"><div class="panel"><div class="panel-head"><h2>입출고 등록</h2></div><form class="form" id="transactionForm"><label for="transactionType">처리 구분</label><select id="transactionType"><option value="불출">불출</option><option value="입고">입고</option></select><label for="product">품목</label><select id="product"></select><div class="row"><div><label for="amount"><span id="amountLabel">불출</span> 수량</label><input id="amount" type="number" min="1" value="1" required></div><div><label for="recipient" id="partyLabel">불출처</label><input id="recipient" placeholder="예: 영업1팀" required></div></div><label for="memo">메모 (선택)</label><input id="memo" placeholder="예: 7월 고객 미팅"><button type="submit" id="transactionButton" style="width:100%">불출 반영하기</button></form></div>
       <div class="panel"><div class="panel-head"><h2>신규 품목 관리</h2></div><form class="form" id="addProductForm"><label for="newName">품목명</label><input id="newName" placeholder="예: 행사 리플릿" required><div class="row"><div><label for="newCategory">카테고리</label><select id="newCategory" required><option value="브로슈어">브로슈어</option><option value="기념품">기념품</option><option value="쇼핑백">쇼핑백</option><option value="패키지박스">패키지박스</option></select></div><div><label for="newQty">초기 수량</label><input id="newQty" type="number" min="0" value="0" required></div></div><label for="newThreshold">알림 기준 수량</label><input id="newThreshold" type="number" min="0" value="0" required><button type="submit" style="width:100%;background:#5c4ee5">신규 품목 추가</button></form></div>
@@ -163,12 +193,14 @@
       <form id="issueRequestForm">
         <label for="requesterName">신청자</label><input id="requesterName" autocomplete="name" maxlength="60" required>
         <label for="requesterTeam">소속 / 부서</label><input id="requesterTeam" autocomplete="organization" maxlength="100" required>
+        <label for="requesterEmail">회사 이메일</label><input id="requesterEmail" type="email" autocomplete="email" maxlength="254" placeholder="name@sgacorp.kr" required>
         <label for="requestQuantity">신청 수량</label><input id="requestQuantity" type="number" min="1" step="1" value="1" required>
+        <label for="requestedPickupDate">희망 수령일 (선택)</label><input id="requestedPickupDate" type="date">
         <label for="requestPurpose">사용 목적</label><textarea id="requestPurpose" maxlength="500" rows="3" placeholder="예: 고객 미팅, 전시회 배포" required></textarea>
         <p class="field-hint">신청 정보는 마케팅팀 관리자가 확인합니다. 신청 후 담당자의 확인을 기다려 주세요.</p>
         <button type="submit" id="submitIssueRequest">불출 신청하기</button><p class="error" id="issueRequestError" role="alert"></p>
       </form>
-      <div id="issueRequestSuccess" hidden role="status"><div class="success-mark">✓</div><h3>불출 신청이 접수되었습니다.</h3><p id="issueReceipt"></p><button type="button" class="ghost" data-close="issueRequestModal">닫기</button></div>
+      <div id="issueRequestSuccess" hidden role="status"><div class="success-mark">✓</div><h3>불출 신청이 접수되었습니다.</h3><p id="issueReceipt"></p><button type="button" class="ghost" id="copyReceipt">접수번호 복사</button><button type="button" class="ghost" data-close="issueRequestModal" style="margin-top:8px">닫기</button></div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
@@ -287,13 +319,14 @@
       if(!db||realtimeStarted)return;
       realtimeStarted=true;
       const refreshAdmin=async()=>{if(!currentAdmin)return;try{await syncQueue;await loadFromSupabase();if(currentAdmin)render();}catch(error){toast('재고 갱신에 실패했습니다: '+error.message)}};
-      db.channel('marketing-inventory').on('postgres_changes',{event:'*',schema:'public',table:'inventory_items'},refreshAdmin).on('postgres_changes',{event:'*',schema:'public',table:'inventory_logs'},refreshAdmin).subscribe();
+      const refreshRequests=()=>{loadPublicInventory();loadPublicRequests();if(currentAdmin)refreshAdminRequests();};
+      db.channel('marketing-inventory').on('postgres_changes',{event:'*',schema:'public',table:'inventory_items'},refreshAdmin).on('postgres_changes',{event:'*',schema:'public',table:'inventory_logs'},refreshAdmin).on('postgres_changes',{event:'*',schema:'public',table:'inventory_issue_requests'},refreshRequests).subscribe();
     }
 
     let brochuresExpanded=false;
     let publicRequestsLoading=false,publicRequestRows=null,publicRequestsLoadedAt=null,statsGeneration=0;
     let publicStocks=[], publicLoaded=false, publicLoading=false, publicFresh=false, publicUpdatedAt=null;
-    let selectedImageId=null, requestItemId=null, requestKey=null, requestBusy=false, imageBusy=false;
+    let selectedImageId=null, requestItemId=null, requestKey=null, lastReceiptId=null, requestBusy=false, imageBusy=false, requestActionBusy=false;
     const modalReturnTargets=new Map();
     function requireAdmin(){if(currentAdmin)return true;openAdminLogin();return false;}
     function setPublicMessage(text,error=false){
@@ -308,7 +341,7 @@
       $('#publicView').hidden=true;$('#adminView').hidden=false;
       $('#adminIdentity').textContent=currentAdmin.name+' 관리자 · 품목명을 눌러 이미지를 등록할 수 있습니다.';
       $('#resetPasswordsButton').hidden=!!db||currentAdmin.email!=='hseo@sgacorp.kr';
-      render();refreshAdminRequests();
+      render();refreshAdminRequests();loadTeamsWebhookStatus();
     }
     function renderPublic(){
       const monitorOrder=['기념품','쇼핑백','패키지박스','브로슈어'];
@@ -318,8 +351,9 @@
         const total=publicLoaded?items.reduce((sum,item)=>sum+item.qty,0).toLocaleString():'—';
         const visibleItems=isBrochure&&!brochuresExpanded?items.slice(0,5):items;
         const nameButton=item=>'<button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button>';
-        const requestButton=item=>'<button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button>';
-        const rows=visibleItems.map(item=>isBrochure?'<article class="brochure-item" role="listitem">'+nameButton(item)+'<div class="brochure-item-footer"><div><span class="brochure-quantity-label">현재 수량</span><strong class="qty">'+item.qty.toLocaleString()+'개</strong></div>'+requestButton(item)+'</div></article>':'<tr><td>'+nameButton(item)+'</td><td class="qty">'+item.qty.toLocaleString()+'개</td><td>'+requestButton(item)+'</td></tr>').join('');
+        const requestButton=item=>'<button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.availableQty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.availableQty<1?'신청 불가':'불출 신청')+'</button>';
+        const quantityView=item=>item.qty.toLocaleString()+'개<span class="availability-note">신청 가능 '+item.availableQty.toLocaleString()+'개'+(item.reservedQty?' · 예약 '+item.reservedQty.toLocaleString()+'개':'')+'</span>';
+        const rows=visibleItems.map(item=>isBrochure?'<article class="brochure-item" role="listitem">'+nameButton(item)+'<div class="brochure-item-footer"><div><span class="brochure-quantity-label">현재 수량</span><strong class="qty">'+quantityView(item)+'</strong></div>'+requestButton(item)+'</div></article>':'<tr><td>'+nameButton(item)+'</td><td class="qty">'+quantityView(item)+'</td><td>'+requestButton(item)+'</td></tr>').join('');
         const expandControl=isBrochure&&items.length>5?'<div class="inventory-expand-wrap"><button type="button" class="ghost inventory-expand-button" id="toggleBrochures" aria-expanded="'+brochuresExpanded+'" aria-controls="monitorItems'+index+'">'+(brochuresExpanded?'접기 · 5개만 보기':'펼쳐보기 · 나머지 '+(items.length-5)+'개')+'</button></div>':'';
         const emptyText=publicLoaded?'등록된 품목이 없습니다.':publicLoading?'재고 확인 중…':'재고 정보를 확인할 수 없습니다.';
         const content=items.length?(isBrochure?'<div class="brochure-items" id="monitorItems'+index+'" role="list">'+rows+'</div>':'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody id="monitorItems'+index+'">'+rows+'</tbody></table>'):'<div class="empty-category">'+emptyText+'</div>';
@@ -345,7 +379,9 @@
         publicStocks=rows.map(item=>{
           const qty=Number(item.qty);
           if(item.id==null||!Number.isSafeInteger(qty)||qty<0)throw new Error('재고 수량을 확인할 수 없습니다.');
-          return {id:String(item.id),name:String(item.name),category:item.category,qty,image_url:item.image_url||'',updated_at:item.updated_at};
+          const reserved=Number(item.reserved_qty||0),available=item.available_qty==null?qty:Number(item.available_qty);
+          if(!Number.isSafeInteger(reserved)||reserved<0||!Number.isSafeInteger(available)||available<0)throw new Error('예약 수량을 확인할 수 없습니다.');
+          return {id:String(item.id),name:String(item.name),category:item.category,qty,reservedQty:reserved,availableQty:available,image_url:item.image_url||'',updated_at:item.updated_at};
         });
         publicLoaded=true;publicFresh=true;publicUpdatedAt=new Date();
         setPublicMessage(cloudConfigured?'':'이 브라우저에 저장된 재고입니다. 공동 조회와 신청 접수는 연결 설정 후 사용할 수 있습니다.');
@@ -414,29 +450,31 @@
     function openIssueRequest(id){
       if(!publicFresh)return toast('최신 재고를 조회한 후 신청해 주세요.');
       const item=publicStocks.find(item=>String(item.id)===String(id));
-      if(!item||item.qty<1)return toast('현재 신청할 수 있는 재고가 없습니다.');
+      if(!item||item.availableQty<1)return toast('현재 신청할 수 있는 재고가 없습니다.');
       requestItemId=String(item.id);requestKey=uuid();
-      $('#issueRequestForm').reset();$('#requestQuantity').max=String(item.qty);
+      lastReceiptId=null;$('#issueRequestForm').reset();$('#requestQuantity').max=String(item.availableQty);
+      $('#requestedPickupDate').min=new Date().toISOString().slice(0,10);
       $('#issueRequestForm').hidden=false;$('#issueRequestSuccess').hidden=true;
       $('#issueRequestError').textContent='';$('#issueReceipt').textContent='';
-      $('#issueRequestItem').textContent=item.name+' · 현재 '+item.qty.toLocaleString()+'개';
+      $('#issueRequestItem').textContent=item.name+' · 신청 가능 '+item.availableQty.toLocaleString()+'개';
       openDialog('issueRequestModal');
     }
     $('#issueRequestForm').addEventListener('submit',async event=>{
       event.preventDefault();if(requestBusy)return;
-      const quantity=Number($('#requestQuantity').value),name=$('#requesterName').value.trim(),team=$('#requesterTeam').value.trim(),purpose=$('#requestPurpose').value.trim();
+      const quantity=Number($('#requestQuantity').value),name=$('#requesterName').value.trim(),team=$('#requesterTeam').value.trim(),email=$('#requesterEmail').value.trim().toLowerCase(),pickup=$('#requestedPickupDate').value||null,purpose=$('#requestPurpose').value.trim();
       const item=publicStocks.find(item=>String(item.id)===requestItemId);
-      if(!item||!Number.isSafeInteger(quantity)||quantity<1||quantity>item.qty||!name||!team||!purpose){
-        $('#issueRequestError').textContent='신청자, 소속, 사용 목적과 신청 가능한 정수 수량을 확인해 주세요.';return;
+      if(!item||!Number.isSafeInteger(quantity)||quantity<1||quantity>item.availableQty||!name||!team||!email||!purpose){
+        $('#issueRequestError').textContent='신청자, 소속, 이메일, 사용 목적과 신청 가능한 정수 수량을 확인해 주세요.';return;
       }
       requestBusy=true;$('#submitIssueRequest').disabled=true;$('#submitIssueRequest').textContent='신청 접수 중…';$('#issueRequestError').textContent='';
       try{
         if(!db)throw new Error('신청 접수 연결을 사용할 수 없습니다. 관리자에게 문의해 주세요.');
-        const {data,error}=await db.rpc('inventory_submit_request_v1',{p_request_key:requestKey,p_item_id:requestItemId,p_quantity:quantity,p_requester_name:name,p_requester_team:team,p_purpose:purpose});
+        const {data,error}=await db.rpc('inventory_submit_request_v2',{p_request_key:requestKey,p_item_id:requestItemId,p_quantity:quantity,p_requester_name:name,p_requester_team:team,p_requester_email:email,p_requested_pickup_date:pickup,p_purpose:purpose});
         if(error)throw error;
         if(!data)throw new Error('접수 결과를 확인하지 못했습니다. 다시 시도해 주세요.');
+        lastReceiptId=String(data);
         $('#issueRequestForm').hidden=true;$('#issueRequestSuccess').hidden=false;
-        $('#issueReceipt').textContent=item.name+' '+quantity.toLocaleString()+'개 · 접수번호 '+String(data).slice(0,8)+' · 담당자 확인 후 불출됩니다.';
+        $('#issueReceipt').textContent=item.name+' '+quantity.toLocaleString()+'개 · 접수번호 '+lastReceiptId+' · 상태 조회에 전체 접수번호와 이메일이 필요합니다.';
         $('#issueRequestSuccess button').focus();
         loadPublicRequests();if(currentAdmin)refreshAdminRequests();
       }catch(error){
@@ -444,18 +482,85 @@
         $('#issueRequestError').textContent=/PGRST202|42883|42501|42P01/.test(code)?'신청 접수 기능의 연결 설정이 필요합니다. 관리자에게 문의해 주세요.':(error.message||'접수에 실패했습니다. 입력 내용을 유지한 채 다시 시도해 주세요.');
       }finally{requestBusy=false;$('#submitIssueRequest').disabled=false;$('#submitIssueRequest').textContent='불출 신청하기';}
     });
+    $('#copyReceipt').addEventListener('click',async()=>{
+      if(!lastReceiptId)return;
+      try{await navigator.clipboard.writeText(lastReceiptId);toast('접수번호를 복사했습니다.');}
+      catch{const input=document.createElement('textarea');input.value=lastReceiptId;document.body.appendChild(input);input.select();document.execCommand('copy');input.remove();toast('접수번호를 복사했습니다.');}
+    });
+    const requestStatusMeta={requested:{label:'접수',className:'status-requested'},approved:{label:'승인',className:'status-approved'},completed:{label:'불출 완료',className:'status-completed'},rejected:{label:'반려',className:'status-rejected'}};
+    const statusBadge=status=>{const meta=requestStatusMeta[status]||requestStatusMeta.requested;return '<span class="status-badge '+meta.className+'">'+meta.label+'</span>';};
+    const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    $('#requestLookupForm').addEventListener('submit',async event=>{
+      event.preventDefault();const button=$('#lookupButton'),result=$('#lookupResult');
+      const id=$('#lookupRequestId').value.trim(),email=$('#lookupEmail').value.trim().toLowerCase();
+      result.hidden=false;result.textContent='신청 상태를 확인하는 중입니다.';button.disabled=true;
+      try{
+        if(!db||!uuidPattern.test(id)||!email)throw new Error('조회되지 않음');
+        const response=await db.rpc('inventory_request_status_v1',{p_request_id:id,p_requester_email:email});
+        if(response.error)throw response.error;if(!response.data)throw new Error('조회되지 않음');
+        const row=response.data,details=[];
+        details.push('신청 '+requestDateText(row.created_at));
+        if(row.requested_pickup_date)details.push('희망 수령일 '+row.requested_pickup_date);
+        if(row.reviewed_at)details.push('검토 '+requestDateText(row.reviewed_at));
+        if(row.completed_at)details.push('불출 '+requestDateText(row.completed_at));
+        result.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>'+esc(row.item_name)+' · '+Number(row.quantity).toLocaleString()+'개</strong>'+statusBadge(row.request_status)+'</div><div>'+esc(details.join(' · '))+'</div>'+(row.rejection_reason?'<div style="color:#bd2635">반려 사유: '+esc(row.rejection_reason)+'</div>':'');
+      }catch{result.textContent='일치하는 신청을 찾지 못했습니다. 전체 접수번호와 신청자 이메일을 확인해 주세요.';}
+      finally{button.disabled=false;}
+    });
     async function loadIssueRequests(){
       if(!currentAdmin)return;
       const signedAdmin=currentAdmin;
       $('#requestList').textContent='신청 내역을 불러오는 중입니다.';
       try{
         if(!db)throw new Error('공동 신청 내역은 Supabase 연결 후 사용할 수 있습니다.');
-        const {data,error}=await db.from('inventory_issue_requests').select('id,item_name,quantity,requester_name,requester_team,purpose,created_at').order('created_at',{ascending:false}).limit(100);
+        const {data,error}=await db.from('inventory_issue_requests').select('id,item_name,item_category,quantity,requester_name,requester_team,requester_email,purpose,requested_pickup_date,request_status,reviewed_by,reviewed_at,rejection_reason,completed_at,teams_notified_at,created_at').order('created_at',{ascending:false}).limit(100);
         if(error)throw error;
         if(currentAdmin!==signedAdmin)return;
-        $('#requestList').innerHTML=data?.length?data.map(row=>'<div class="request-entry"><b>'+esc(row.item_name)+' · '+Number(row.quantity).toLocaleString()+'개</b><br>'+esc(row.requester_name)+' · '+esc(row.requester_team)+'<br>'+esc(row.purpose)+'<br><span>'+esc(new Date(row.created_at).toLocaleString('ko-KR'))+' · 접수번호 '+esc(String(row.id).slice(0,8))+'</span></div>').join(''):'<p class="request-guide">접수된 불출 신청이 없습니다.</p>';
+        const filter=$('#requestStatusFilter').value,rows=(data||[]).filter(row=>filter==='all'||row.request_status===filter);
+        $('#requestList').innerHTML=rows.length?rows.map(row=>{
+          const status=row.request_status||'requested',actions=[];
+          if(status==='requested')actions.push('<button type="button" class="approve-request" data-request-action="approve" data-request-id="'+esc(row.id)+'">승인</button>','<button type="button" class="reject-request" data-request-action="reject" data-request-id="'+esc(row.id)+'">반려</button>');
+          if(status==='approved')actions.push('<button type="button" class="complete-request" data-request-action="complete" data-request-id="'+esc(row.id)+'">불출 완료</button>','<button type="button" class="reject-request" data-request-action="reject" data-request-id="'+esc(row.id)+'">승인 취소·반려</button>','<button type="button" class="ghost" data-request-action="notify" data-request-id="'+esc(row.id)+'">Teams 알림 재전송</button>');
+          const dates=['신청 '+requestDateText(row.created_at)];if(row.requested_pickup_date)dates.push('희망 수령일 '+row.requested_pickup_date);if(row.reviewed_at)dates.push('검토 '+requestDateText(row.reviewed_at));if(row.completed_at)dates.push('불출 '+requestDateText(row.completed_at));
+          return '<div class="request-entry"><div class="request-entry-head"><b>'+esc(row.item_name)+' · '+Number(row.quantity).toLocaleString()+'개</b>'+statusBadge(status)+'</div>'+esc(row.requester_name)+' · '+esc(row.requester_team)+' · '+esc(row.requester_email||'이메일 없음')+'<br>'+esc(row.purpose)+(row.rejection_reason?'<br><strong style="color:#bd2635">반려 사유: '+esc(row.rejection_reason)+'</strong>':'')+'<br><span>'+esc(dates.join(' · '))+' · 접수번호 '+esc(String(row.id))+(row.teams_notified_at?' · Teams 알림 요청 '+esc(requestDateText(row.teams_notified_at)):'')+'</span>'+(actions.length?'<div class="request-entry-actions">'+actions.join('')+'</div>':'')+'</div>';
+        }).join(''):'<p class="request-guide">선택한 상태의 불출 신청이 없습니다.</p>';
       }catch(error){if(currentAdmin===signedAdmin)$('#requestList').textContent='신청 내역을 불러오지 못했습니다. 추가 설정 SQL 실행 여부를 확인해 주세요. '+(error.message||'');}
     }
+
+    async function loadTeamsWebhookStatus(){
+      if(!currentAdmin||!db)return;
+      const input=$('#teamsApprovalWebhook');input.value='';input.placeholder='설정 상태 확인 중…';
+      try{const {data,error}=await db.rpc('inventory_teams_webhook_status_v1');if(error)throw error;input.placeholder=data?'설정됨 · 변경할 새 HTTPS URL 입력':'https://…';}
+      catch{input.placeholder='최신 SQL 실행 후 설정할 수 있습니다.';}
+    }
+    $('#saveTeamsApprovalWebhook').addEventListener('click',async()=>{
+      if(!requireAdmin()||!db)return;const button=$('#saveTeamsApprovalWebhook'),url=$('#teamsApprovalWebhook').value.trim();
+      if(url&&!safeImageUrl(url))return toast('HTTPS Power Automate 워크플로 URL을 입력해 주세요.');
+      if(!url&&!confirm('저장된 Teams 승인 알림 URL을 해제할까요?'))return;
+      button.disabled=true;
+      try{const {data,error}=await db.rpc('inventory_set_teams_webhook_v1',{p_url:url||null});if(error)throw error;$('#teamsApprovalWebhook').value='';toast(data?'Teams 승인 알림 설정을 저장했습니다.':'Teams 승인 알림 설정을 해제했습니다.');await loadTeamsWebhookStatus();}
+      catch(error){toast('Teams 알림 설정을 저장하지 못했습니다. '+(error.message||''));}
+      finally{button.disabled=false;}
+    });
+    async function manageIssueRequest(id,action){
+      if(requestActionBusy||!currentAdmin||!db)return;
+      let reason=null;
+      if(action==='reject'){reason=prompt('반려 사유를 입력해 주세요.');if(reason===null)return;if(!reason.trim())return toast('반려 사유를 입력해 주세요.');}
+      if(action==='complete'&&!confirm('품목을 전달했고 실제 재고에서 신청 수량을 차감할까요?'))return;
+      requestActionBusy=true;
+      try{
+        if(action==='notify'){
+          const {error}=await db.rpc('inventory_retry_teams_notification_v1',{p_request_id:id});if(error)throw error;toast('Teams 승인 알림을 다시 요청했습니다.');
+        }else{
+          const {data,error}=await db.rpc('inventory_manage_request_v1',{p_request_id:id,p_action:action,p_reason:reason});if(error)throw error;
+          if(action==='approve')toast(data?.teams_queued?'승인하고 Teams 알림을 요청했습니다.':'승인은 완료됐지만 Teams 알림 URL이 설정되지 않았습니다.');
+          if(action==='reject')toast('신청을 반려했습니다.');if(action==='complete')toast('불출 완료 처리하고 재고를 차감했습니다.');
+        }
+        await Promise.allSettled([refreshAdminRequests(),loadPublicInventory(),loadPublicRequests(),loadFromSupabase().then(()=>render())]);
+      }catch(error){toast('신청 처리에 실패했습니다. '+(error.message||''));}
+      finally{requestActionBusy=false;}
+    }
+    $('#requestList').addEventListener('click',event=>{const button=event.target.closest('[data-request-action]');if(button)manageIssueRequest(button.dataset.requestId,button.dataset.requestAction);});
 
     function requestDateText(value){
       const date=new Date(value);
@@ -469,7 +574,7 @@
     function renderPublicRequests(){
       if(publicRequestRows===null){$('#publicRequestsList').innerHTML='';return;}
       if(!publicRequestRows.length){$('#publicRequestsList').innerHTML='<p class="section-message">접수된 불출 신청이 없습니다.</p>';return;}
-      $('#publicRequestsList').innerHTML='<table class="public-requests-table"><thead><tr><th scope="col">인벤토리</th><th scope="col">품목</th><th scope="col">신청 수량</th><th scope="col">신청 시각</th></tr></thead><tbody>'+publicRequestRows.map(row=>'<tr><td>'+esc(row.category)+'</td><td>'+esc(row.name)+'</td><td><strong>'+row.quantity.toLocaleString()+'개</strong></td><td>'+esc(requestDateText(row.created_at))+'</td></tr>').join('')+'</tbody></table>';
+      $('#publicRequestsList').innerHTML='<table class="public-requests-table"><thead><tr><th scope="col">인벤토리</th><th scope="col">품목</th><th scope="col">신청 수량</th><th scope="col">상태</th><th scope="col">신청 시각</th></tr></thead><tbody>'+publicRequestRows.map(row=>'<tr><td>'+esc(row.category)+'</td><td>'+esc(row.name)+'</td><td><strong>'+row.quantity.toLocaleString()+'개</strong></td><td>'+statusBadge(row.status)+'</td><td>'+esc(requestDateText(row.created_at))+'</td></tr>').join('')+'</tbody></table>';
     }
     async function loadPublicRequests(){
       if(publicRequestsLoading)return;
@@ -482,7 +587,7 @@
         const {data,error}=await db.rpc('inventory_recent_requests_v1');
         if(error)throw error;
         if(!Array.isArray(data))throw new Error('신청 내역 응답을 확인할 수 없습니다.');
-        publicRequestRows=data.map(row=>({name:String(row.item_name),category:row.item_category||'분류 확인 필요',quantity:countValue(row.quantity),created_at:row.created_at}));
+        publicRequestRows=data.map(row=>({name:String(row.item_name),category:row.item_category||'분류 확인 필요',quantity:countValue(row.quantity),status:row.request_status||'requested',created_at:row.created_at}));
         publicRequestsLoadedAt=new Date();
         renderPublicRequests();message.classList.remove('error');
         message.textContent='최근 '+publicRequestRows.length+'건 · '+publicRequestsLoadedAt.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Seoul'})+' 조회';
@@ -548,6 +653,7 @@
     $('#refreshPublicRequests').addEventListener('click',loadPublicRequests);
     $('#refreshRequestStats').addEventListener('click',loadRequestStats);
     $('#refreshRequests').addEventListener('click',refreshAdminRequests);
+    $('#requestStatusFilter').addEventListener('change',loadIssueRequests);
     $('#showPublic').addEventListener('click',showPublicView);
     $('#closeLogin').addEventListener('click',()=>closeDialog('passwordModal'));
     $('#logoutAdmin').addEventListener('click',async()=>{
