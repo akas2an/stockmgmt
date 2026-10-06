@@ -24,8 +24,19 @@
     .monitor-heading > button { flex-shrink:0; }
     .monitor-message { padding:12px 16px; margin:0 0 20px; background:#edf3fb; border-radius:8px; color:#435976; font-size:13px; }
     .monitor-message.error { background:#fff0f1; color:#a92939; }
-    .monitor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .monitor-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; align-items:stretch; }
     .monitor-card { background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    .monitor-card--brochures { grid-column:1 / -1; }
+    .monitor-card--compact .monitor-table th,.monitor-card--compact .monitor-table td { padding:14px 12px; }
+    .monitor-card--compact .monitor-table th:nth-child(2),.monitor-card--compact .monitor-table td:nth-child(2) { width:68px; }
+    .monitor-card--compact .monitor-table th:nth-child(3),.monitor-card--compact .monitor-table td:nth-child(3) { width:100px; }
+    .brochure-items { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; padding:22px; }
+    .brochure-item { display:flex; flex-direction:column; justify-content:space-between; gap:20px; padding:18px; border:1px solid var(--line); border-radius:10px; min-width:0; }
+    .brochure-item .item-name-button { align-self:flex-start; font-size:15px; }
+    .brochure-item-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brochure-quantity-label { display:block; color:var(--muted); font-size:11px; margin-bottom:5px; }
+    .brochure-item .qty { font-size:21px; }
+    @media(max-width:680px) { .brochure-items { grid-template-columns:1fr; padding:16px; gap:12px; } }
     .monitor-card-head { display:flex; justify-content:space-between; align-items:center; padding:23px 24px; gap:16px; border-bottom:1px solid var(--line); background:#fbfcfe; }
     .monitor-card-head h3 { margin:4px 0 0; font-size:20px; letter-spacing:-.5px; }
     .category-label { font-size:10px; color:#6381ab; letter-spacing:1.3px; font-weight:750; }
@@ -65,7 +76,7 @@
     .success-mark { display:grid; place-items:center; width:52px; height:52px; background:#e5f7f0; color:#087d56; border-radius:50%; margin:18px 0; font-size:25px; }
     #issueRequestSuccess h3 { font-size:18px; margin:12px 0; }
     .toast { z-index:40; }
-    @media(max-width:800px) {
+    @media(max-width:680px) {
       .monitor-grid { grid-template-columns:1fr; }
       .monitor-heading,.admin-heading { align-items:flex-start; }
       .monitor-heading h2,.admin-heading h2 { font-size:20px; }
@@ -300,14 +311,19 @@
       render();refreshAdminRequests();
     }
     function renderPublic(){
-      $('#monitorGrid').innerHTML=categoryOrder.map((category,index)=>{
+      const monitorOrder=['기념품','쇼핑백','패키지박스','브로슈어'];
+      $('#monitorGrid').innerHTML=monitorOrder.map((category,position)=>{
+        const index=categoryOrder.indexOf(category),isBrochure=category==='브로슈어';
         const items=publicStocks.filter(item=>item.category===category);
         const total=publicLoaded?items.reduce((sum,item)=>sum+item.qty,0).toLocaleString():'—';
-        const visibleItems=category==='브로슈어'&&!brochuresExpanded?items.slice(0,5):items;
-        const rows=visibleItems.map(item=>'<tr><td><button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button></td><td class="qty">'+item.qty.toLocaleString()+'개</td><td><button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button></td></tr>').join('');
-        const expandControl=category==='브로슈어'&&items.length>5?'<div class="inventory-expand-wrap"><button type="button" class="ghost inventory-expand-button" id="toggleBrochures" aria-expanded="'+brochuresExpanded+'" aria-controls="monitorItems'+index+'">'+(brochuresExpanded?'접기 · 5개만 보기':'펼쳐보기 · 나머지 '+(items.length-5)+'개')+'</button></div>':'';
+        const visibleItems=isBrochure&&!brochuresExpanded?items.slice(0,5):items;
+        const nameButton=item=>'<button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button>';
+        const requestButton=item=>'<button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button>';
+        const rows=visibleItems.map(item=>isBrochure?'<article class="brochure-item" role="listitem">'+nameButton(item)+'<div class="brochure-item-footer"><div><span class="brochure-quantity-label">현재 수량</span><strong class="qty">'+item.qty.toLocaleString()+'개</strong></div>'+requestButton(item)+'</div></article>':'<tr><td>'+nameButton(item)+'</td><td class="qty">'+item.qty.toLocaleString()+'개</td><td>'+requestButton(item)+'</td></tr>').join('');
+        const expandControl=isBrochure&&items.length>5?'<div class="inventory-expand-wrap"><button type="button" class="ghost inventory-expand-button" id="toggleBrochures" aria-expanded="'+brochuresExpanded+'" aria-controls="monitorItems'+index+'">'+(brochuresExpanded?'접기 · 5개만 보기':'펼쳐보기 · 나머지 '+(items.length-5)+'개')+'</button></div>':'';
         const emptyText=publicLoaded?'등록된 품목이 없습니다.':publicLoading?'재고 확인 중…':'재고 정보를 확인할 수 없습니다.';
-        return '<section class="monitor-card" aria-labelledby="categoryTitle'+index+'"><div class="monitor-card-head"><div><span class="category-label">INVENTORY / 0'+(index+1)+'</span><h3 id="categoryTitle'+index+'">'+esc(category)+'</h3></div><div class="category-total"><strong>'+total+'</strong><span>총 보유 수량 · 개</span></div></div>'+(items.length?'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody id="monitorItems'+index+'">'+rows+'</tbody></table>':'<div class="empty-category">'+emptyText+'</div>')+expandControl+'</section>';
+        const content=items.length?(isBrochure?'<div class="brochure-items" id="monitorItems'+index+'" role="list">'+rows+'</div>':'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody id="monitorItems'+index+'">'+rows+'</tbody></table>'):'<div class="empty-category">'+emptyText+'</div>';
+        return '<section class="monitor-card '+(isBrochure?'monitor-card--brochures':'monitor-card--compact')+'" aria-labelledby="categoryTitle'+index+'"><div class="monitor-card-head"><div><span class="category-label">INVENTORY / 0'+(position+1)+'</span><h3 id="categoryTitle'+index+'">'+esc(category)+'</h3></div><div class="category-total"><strong>'+total+'</strong><span>총 보유 수량 · 개</span></div></div>'+content+expandControl+'</section>';
       }).join('');
       const time=publicUpdatedAt?'조회: '+publicUpdatedAt.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}):'';
       if(!$('#publicView').hidden)$('#today').textContent=formatDate(new Date())+(time?' | '+time:'');
