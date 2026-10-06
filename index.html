@@ -8,13 +8,86 @@
     :root{--navy:#0a192f;--ink:#152238;--muted:#6b778c;--line:#e5eaf1;--blue:#1463e8;--cyan:#06b6d4;--red:#e5484d;--amber:#e89000;--bg:#f5f7fb;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}.top{background:linear-gradient(115deg,#09172c,#103c75);color:#fff;padding:36px max(24px,calc((100% - 1220px)/2));display:flex;justify-content:space-between;align-items:end;gap:20px}.eyebrow{color:#78d9ff;font-size:12px;font-weight:800;letter-spacing:1.4px}.top h1{font-size:30px;margin:8px 0 0}.top p{margin:7px 0 0;color:#b9c8dd}.date{font-size:13px;color:#b9c8dd;text-align:right}.wrap{max-width:1220px;margin:28px auto;padding:0 24px 56px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:22px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 20px}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;font-size:23px;margin-top:4px}.stat strong.red{color:var(--red)}.stat .low-names{display:block;font-size:12px;line-height:1.4;margin-top:4px;font-weight:650;color:#bd2635}.workspace{display:grid;grid-template-columns:minmax(285px,.7fr) minmax(0,1.8fr);gap:22px;align-items:start}.sidebar,.content-stack{display:grid;gap:22px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.panel-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panel-head h2{font-size:17px;margin:0}.panel-head small{color:var(--muted)}table{width:100%;border-collapse:collapse}th,td{padding:15px 16px;text-align:left;border-bottom:1px solid #edf0f5;font-size:14px}th{font-size:12px;color:var(--muted);font-weight:700;background:#fbfcfe}.product{font-weight:750}.category{font-size:12px;color:var(--muted);display:block;margin-top:3px}.qty{font-weight:800;font-variant-numeric:tabular-nums}.qty-edit{padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);font:inherit;font-weight:800;font-variant-numeric:tabular-nums}.qty-edit:hover{color:var(--blue);filter:none;text-decoration:underline}.status{font-size:12px;font-weight:800;border-radius:99px;padding:5px 9px;display:inline-block}.status-action{border:0;cursor:pointer}.status-note{display:block;font-size:11px;line-height:1.35;margin-top:5px;color:var(--muted);font-weight:650}.safe{color:#087d56;background:#e5f7f0}.low{color:#a65d00;background:#fff1d7}.danger{color:#bd2635;background:#ffeaec}.needs-replenishment{outline:2px solid #e5484d;outline-offset:-2px;animation:replenishBlink 1.1s ease-in-out infinite}.needs-replenishment td{background:#fffafb}@keyframes replenishBlink{50%{outline-color:transparent;box-shadow:inset 0 0 0 2px #ffc4c7}}.category-row td{padding:0;border-bottom:1px solid var(--line)}.category-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border-radius:0;background:#f8faff;color:var(--ink);padding:14px 16px;text-align:left}.category-toggle:hover{filter:none;background:#eef4ff}.category-toggle .left{display:flex;align-items:center;gap:9px}.category-toggle .arrow{color:var(--blue);font-size:16px;transition:.15s}.category-toggle.collapsed .arrow{transform:rotate(-90deg)}.category-toggle small{font-size:12px;color:var(--muted);font-weight:600}.category-toggle .alert{color:#bd2635}button{border:0;border-radius:8px;background:var(--blue);color:#fff;font:inherit;font-weight:750;cursor:pointer;padding:9px 12px}button:hover{filter:brightness(.92)}button.ghost{background:#eef4ff;color:#1454bb}.status-action.low{padding:5px 9px;background:#fff1d7;color:#a65d00}.status-action.danger{padding:5px 9px;background:#ffeaec;color:#bd2635}.form{padding:20px 22px}.form label{display:block;font-size:12px;color:var(--muted);font-weight:750;margin:0 0 7px}.form select,.form input{width:100%;border:1px solid #d9e1ec;border-radius:8px;padding:11px;font:inherit;margin:0 0 15px;background:#fff}.form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compact .panel-head{padding:14px 18px}.compact .panel-head h2{font-size:15px}.compact .form{padding:14px 18px}.compact .form label{display:none}.compact .form select,.compact .form input{margin:0}.compact .compact-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.compact .compact-row button{grid-column:span 2}.notice{padding:18px 20px;background:#fffbf3;border-left:4px solid var(--amber);margin:0 18px 18px;border-radius:7px}.notice strong{font-size:14px;display:block}.notice p{font-size:13px;color:#665740;line-height:1.55;margin:6px 0 0}.setting{padding:20px 22px}.setting h3{font-size:14px;margin:0 0 7px}.setting p{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 14px}.log{padding:0 22px 20px;max-height:300px;overflow:auto}.log div{font-size:13px;border-bottom:1px solid #edf0f5;padding:11px 0;color:#526075}.log b{color:var(--ink)}.toast{position:fixed;right:24px;bottom:24px;background:#12213b;color:#fff;padding:14px 17px;border-radius:10px;box-shadow:0 12px 30px #0a192f44;display:none;max-width:370px;font-size:13px;line-height:1.5}.toast.on{display:block}.modal-backdrop{position:fixed;inset:0;background:#071528cc;z-index:20;display:grid;place-items:center;padding:24px}.modal{width:min(100%,390px);max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:28px;box-shadow:0 22px 80px #0006}.modal.status-open{width:min(100%,760px)}.modal h2{font-size:21px;margin:0 0 8px}.modal p{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 20px}.modal label{font-size:12px;font-weight:750;color:var(--muted);display:block;margin:0 0 7px}.modal input,.modal select{width:100%;border:1px solid #d9e1ec;border-radius:8px;padding:11px;font:inherit;margin:0 0 13px}.admin-options{display:grid;gap:8px;margin:0 0 15px}.admin-options label{display:flex;align-items:center;gap:8px;padding:10px 12px;margin:0;border:1px solid #d9e1ec;border-radius:8px;color:var(--ink);cursor:pointer}.admin-options input{width:auto;margin:0;accent-color:var(--blue)}.modal button{width:100%;}.modal .error{font-size:12px;color:#bd2635;min-height:18px;margin:8px 0 0}.modal-divider{height:1px;background:var(--line);margin:20px 0}.status-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.status-summary div{padding:12px;background:#f5f8fd;border-radius:9px;font-size:12px;color:var(--muted)}.status-summary b{display:block;color:var(--ink);font-size:19px;margin-top:4px}.bar-row{display:grid;grid-template-columns:100px 1fr 54px;gap:10px;align-items:center;margin:12px 0;font-size:13px}.bar-track{height:11px;background:#e9eef7;border-radius:99px;overflow:hidden}.bar-fill{height:100%;background:linear-gradient(90deg,#1463e8,#06b6d4);border-radius:99px}.status-back{margin-top:18px}.modal-backdrop.hidden{display:none}@media(max-width:800px){.top{align-items:start;flex-direction:column}.date{text-align:left}.stats,.workspace,.status-summary{grid-template-columns:1fr}.panel{overflow:auto}table{min-width:620px}.bar-row{grid-template-columns:80px 1fr 44px}}
   </style>
   <style>
+    .date { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .admin-login-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 14px; border: 1px solid #88a9d2; background: #ffffff12; color: #fff; font-size: 13px; white-space: nowrap; }
+    .admin-login-button:hover { background: #ffffff24; filter: none; }
+    .admin-login-button:focus-visible { outline: 2px solid #78d9ff; outline-offset: 4px; }
     .date #today { display: grid; gap: 5px; }
     .date #today span:last-child { color: #8fb1df; }
+    @media (max-width: 800px) { .top > .date { align-self: flex-end; text-align: right; } }
+  </style>
+  <style>
+    [hidden] { display: none !important; }
+    .monitor-heading,.admin-heading { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:30px 0 20px; }
+    .monitor-heading h2,.admin-heading h2 { margin:0 0 8px; font-size:23px; letter-spacing:-.6px; }
+    .monitor-heading p,.admin-heading p { margin:0; font-size:13px; color:var(--muted); line-height:1.6; }
+    .monitor-heading > button { flex-shrink:0; }
+    .monitor-message { padding:12px 16px; margin:0 0 20px; background:#edf3fb; border-radius:8px; color:#435976; font-size:13px; }
+    .monitor-message.error { background:#fff0f1; color:#a92939; }
+    .monitor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .monitor-card { background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    .monitor-card-head { display:flex; justify-content:space-between; align-items:center; padding:23px 24px; gap:16px; border-bottom:1px solid var(--line); background:#fbfcfe; }
+    .monitor-card-head h3 { margin:4px 0 0; font-size:20px; letter-spacing:-.5px; }
+    .category-label { font-size:10px; color:#6381ab; letter-spacing:1.3px; font-weight:750; }
+    .category-total { text-align:right; }
+    .category-total strong { display:block; font-size:28px; font-weight:800; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+    .category-total span { color:var(--muted); font-size:11px; }
+    .monitor-table { width:100%; table-layout:fixed; min-width:0; }
+    .monitor-table th,.monitor-table td { padding:16px 20px; vertical-align:middle; }
+    .monitor-table th { background:#fff; font-size:11px; }
+    .monitor-table th:nth-child(2),.monitor-table td:nth-child(2) { width:92px; text-align:right; }
+    .monitor-table th:nth-child(3),.monitor-table td:nth-child(3) { width:116px; text-align:right; }
+    .monitor-table tbody tr:last-child td { border-bottom:0; }
+    .item-name-button { padding:0; background:none; border-radius:2px; color:var(--ink); font-size:14px; text-align:left; line-height:1.5; word-break:keep-all; overflow-wrap:anywhere; }
+    .item-name-button:hover { color:var(--blue); text-decoration:underline; filter:none; }
+    .item-name-button small { display:block; font-size:10px; font-weight:500; color:#7890ad; margin-top:4px; }
+    .issue-request-button { font-size:12px; padding:9px 11px; white-space:nowrap; }
+    button:disabled { cursor:not-allowed; opacity:.48; filter:none; }
+    button:focus-visible { outline:2px solid #1463e8; outline-offset:3px; }
+    .empty-category { padding:30px 24px; font-size:13px; color:var(--muted); text-align:center; }
+    .admin-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .requests-panel { margin-bottom:22px; }
+    .request-guide { margin:16px 22px; font-size:13px; color:var(--muted); line-height:1.7; }
+    .request-list { padding:0 22px 18px; max-height:420px; overflow:auto; }
+    .request-entry { padding:14px 0; border-bottom:1px solid var(--line); font-size:13px; line-height:1.7; overflow-wrap:anywhere; }
+    .request-entry:last-child { border:0; }
+    .request-entry span { color:var(--muted); }
+    .modal { position:relative; }
+    .modal .dialog-close { position:absolute; right:15px; top:12px; width:32px; height:32px; padding:0; background:transparent; color:var(--muted); font-size:26px; font-weight:400; }
+    .modal h2 { padding-right:28px; }
+    .image-dialog { width:min(100%,600px); }
+    .request-dialog { width:min(100%,430px); }
+    .item-image-stage { display:grid; place-items:center; min-height:240px; background:#f4f7fb; border-radius:10px; overflow:hidden; margin-bottom:20px; }
+    .item-image-stage img { max-width:100%; max-height:420px; object-fit:contain; display:block; }
+    .image-empty { padding:40px 20px; color:var(--muted); font-size:14px; text-align:center; }
+    .modal textarea { width:100%; border:1px solid #d9e1ec; border-radius:8px; padding:11px; font:inherit; resize:vertical; margin-bottom:12px; }
+    .modal .field-hint { font-size:12px; margin-bottom:14px; }
+    .success-mark { display:grid; place-items:center; width:52px; height:52px; background:#e5f7f0; color:#087d56; border-radius:50%; margin:18px 0; font-size:25px; }
+    #issueRequestSuccess h3 { font-size:18px; margin:12px 0; }
+    .toast { z-index:40; }
+    @media(max-width:800px) {
+      .monitor-grid { grid-template-columns:1fr; }
+      .monitor-heading,.admin-heading { align-items:flex-start; }
+      .monitor-heading h2,.admin-heading h2 { font-size:20px; }
+      .monitor-card-head { padding:20px; }
+      .monitor-table th,.monitor-table td { padding:14px 12px; }
+      .monitor-table th:nth-child(2),.monitor-table td:nth-child(2) { width:70px; }
+      .monitor-table th:nth-child(3),.monitor-table td:nth-child(3) { width:102px; }
+      .admin-heading { flex-direction:column; }
+    }
+    @media(prefers-reduced-motion:reduce) { .needs-replenishment { animation:none; } }
   </style>
 </head>
 <body><style>.panel:has(#saveSetting){display:none}</style>
-  <header class="top"><div><div class="eyebrow">MARKETING OPERATIONS</div><h1>마케팅팀 자산 관리 사이트</h1><p>브로슈어 · 기념품 · 쇼핑백 · 패키지박스의 재고 현황과 불출 이력 관리</p></div><div class="date"><div id="today"></div><button class="ghost" type="button" id="resetPasswordsButton" hidden style="margin-top:9px">비밀번호 초기화</button></div></header>
-  <main class="wrap">
+  <header class="top"><div><div class="eyebrow">MARKETING OPERATIONS</div><h1>마케팅팀 자산 관리 사이트</h1><p>브로슈어 · 기념품 · 쇼핑백 · 패키지박스의 재고 현황 확인과 불출 신청</p></div><div class="date"><button class="admin-login-button" type="button" id="adminLoginButton" aria-haspopup="dialog" aria-controls="passwordModal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg>관리자</button><div id="today"></div><button class="ghost" type="button" id="resetPasswordsButton" hidden style="margin-top:9px">비밀번호 초기화</button></div></header>
+  <main class="wrap" id="publicView">
+    <div class="monitor-heading"><div><h2>마케팅 자산 재고 현황</h2><p>품목명을 누르면 이미지를 볼 수 있습니다. 필요한 수량은 불출 신청으로 접수해 주세요.</p></div><button type="button" class="ghost" id="refreshPublic">새로고침</button></div>
+    <p class="monitor-message" id="publicMessage" role="status" aria-live="polite">재고 정보를 불러오는 중입니다.</p>
+    <div class="monitor-grid" id="monitorGrid"></div>
+  </main>
+  <main class="wrap" id="adminView" hidden>
+    <div class="admin-heading"><div><h2>관리자 재고 관리</h2><p id="adminIdentity"></p></div><div class="admin-actions"><button class="ghost" type="button" id="showPublic">모니터링 화면</button><button class="ghost" type="button" id="logoutAdmin">로그아웃</button></div></div>
+    <section class="panel requests-panel"><div class="panel-head"><h2>불출 신청 내역</h2><button class="ghost" type="button" id="refreshRequests">새로고침</button></div><p class="request-guide">접수된 신청을 확인한 뒤 기존 입출고 등록에서 실제 불출 수량을 반영해 주세요. 신청만으로 재고가 차감되지는 않습니다.</p><div id="requestList" class="request-list"></div></section>
     <section class="stats"><div class="stat"><span>관리 품목</span><strong id="itemCount">0개</strong></div><div class="stat"><span>보충 필요 품목</span><strong class="red" id="lowCount">0개</strong><span class="low-names" id="lowNames">현재 보충 필요 품목이 없습니다.</span></div></section>
     <section class="workspace"><aside class="sidebar"><div class="panel"><div class="panel-head"><h2>입출고 등록</h2></div><form class="form" id="transactionForm"><label for="transactionType">처리 구분</label><select id="transactionType"><option value="불출">불출</option><option value="입고">입고</option></select><label for="product">품목</label><select id="product"></select><div class="row"><div><label for="amount"><span id="amountLabel">불출</span> 수량</label><input id="amount" type="number" min="1" value="1" required></div><div><label for="recipient" id="partyLabel">불출처</label><input id="recipient" placeholder="예: 영업1팀" required></div></div><label for="memo">메모 (선택)</label><input id="memo" placeholder="예: 7월 고객 미팅"><button type="submit" id="transactionButton" style="width:100%">불출 반영하기</button></form></div>
       <div class="panel"><div class="panel-head"><h2>신규 품목 관리</h2></div><form class="form" id="addProductForm"><label for="newName">품목명</label><input id="newName" placeholder="예: 행사 리플릿" required><div class="row"><div><label for="newCategory">카테고리</label><select id="newCategory" required><option value="브로슈어">브로슈어</option><option value="기념품">기념품</option><option value="쇼핑백">쇼핑백</option><option value="패키지박스">패키지박스</option></select></div><div><label for="newQty">초기 수량</label><input id="newQty" type="number" min="0" value="0" required></div></div><label for="newThreshold">알림 기준 수량</label><input id="newThreshold" type="number" min="0" value="0" required><button type="submit" style="width:100%;background:#5c4ee5">신규 품목 추가</button></form></div>
@@ -22,28 +95,109 @@
       <div class="content-stack"><div class="panel"><div class="panel-head"><h2>현재 재고</h2><button class="ghost" type="button" id="downloadLogs">최근 입출고 이력 다운로드</button></div><table id="stockTable"><thead><tr><th>품목</th><th>현재수량</th><th>알림기준</th><th>상태</th><th>관리</th></tr></thead></table></div>
       <div class="panel"><div class="panel-head"><h2>최근 변경 이력</h2></div><div class="log" id="logs"></div></div>
       <div class="panel"><div class="panel-head"><h2>재고 알림</h2></div><div class="notice"><strong>Teams 관리자 알림 연동</strong><p>재고가 설정 기준 이하가 되면 아래 관리자에게 알림을 전송하도록 설계했습니다. 실제 발송을 위해서는 사내 Power Automate 또는 Teams 워크플로 URL을 아래에 연결하세요.</p></div><div class="setting"><h3>알림 수신 관리자</h3><p>엄은경 · ekeum@sgacorp.kr<br>이윤지 · yj_lee@sgacorp.kr<br>어현선 · hseo@sgacorp.kr</p><label for="webhook">알림 워크플로 URL</label><input id="webhook" type="url" placeholder="https://..." style="margin-top:7px"><button class="ghost" type="button" id="saveSetting">설정 저장</button></div></div></div></section>
-  </main><div class="toast" id="toast"></div><div class="modal-backdrop" id="passwordModal"><div class="modal" id="modalCard"><h2 id="passwordTitle">관리자 인증</h2><p id="passwordGuide">관리자를 선택하고 비밀번호를 입력하세요.</p><form id="passwordForm"><label>관리자</label><div class="admin-options" id="adminSelect"></div><label for="passwordInput">비밀번호</label><input id="passwordInput" type="password" autocomplete="current-password" required autofocus><div id="confirmPasswordWrap" hidden><label for="confirmPasswordInput">비밀번호 확인</label><input id="confirmPasswordInput" type="password" autocomplete="new-password"></div><button type="submit" id="passwordButton">잠금 해제</button><div class="error" id="passwordError"></div></form><div class="modal-divider" id="modalDivider"></div><button class="ghost" type="button" id="statusButton">재고 현황 파악</button><div id="loginStatusView" hidden><div id="loginStatusList"></div><button class="ghost status-back" type="button" id="backToLogin">로그인 화면으로 돌아가기</button></div></div></div><div class="modal-backdrop hidden" id="correctionModal"><div class="modal"><h2 id="correctionTitle">변경 이력 수정</h2><p id="correctionGuide"></p><form id="correctionForm"><input id="correctionIndex" type="hidden"><div id="correctionFields"></div><button type="submit">수정 반영</button><button class="ghost" type="button" id="closeCorrectionModal" style="margin-top:10px">취소</button></form></div></div><div class="modal-backdrop hidden" id="quantityModal"><div class="modal"><h2 id="quantityTitle">현재 수량 수정</h2><p id="quantityGuide">수정한 수량은 변경 이력에 기록됩니다.</p><form id="quantityForm"><input id="quantityStockId" type="hidden"><label for="quantityValue">현재 수량</label><input id="quantityValue" type="number" min="0" required><label for="quantityReason">수정 사유 (선택)</label><input id="quantityReason" placeholder="예: 실사 수량 반영"><button type="submit">수량 수정 반영</button><button class="ghost" type="button" id="closeQuantityModal" style="margin-top:10px">취소</button></form></div></div><div class="modal-backdrop hidden" id="replenishmentModal"><div class="modal"><h2 id="replenishmentTitle">보충 진행 상태</h2><p>재고 보충을 위한 현재 진행 상태를 선택하세요.</p><form id="replenishmentForm"><input id="replenishmentStockId" type="hidden"><label for="replenishmentStatus">진행 상태</label><select id="replenishmentStatus" required><option value="인쇄 진행 중">인쇄 진행 중</option><option value="인쇄 품의 중">인쇄 품의 중</option></select><button type="submit">완료</button><button class="ghost" type="button" id="closeReplenishmentModal" style="margin-top:10px">취소</button></form></div></div>
+  </main><div class="toast" id="toast"></div><div class="modal-backdrop hidden" id="passwordModal" role="dialog" aria-modal="true" aria-labelledby="passwordTitle"><div class="modal" id="modalCard"><button type="button" class="dialog-close" id="closeLogin" aria-label="로그인 창 닫기">×</button><h2 id="passwordTitle">관리자 인증</h2><p id="passwordGuide">관리자를 선택하고 비밀번호를 입력하세요.</p><form id="passwordForm"><label>관리자</label><div class="admin-options" id="adminSelect"></div><label for="passwordInput">비밀번호</label><input id="passwordInput" type="password" autocomplete="current-password" required><div id="confirmPasswordWrap" hidden><label for="confirmPasswordInput">비밀번호 확인</label><input id="confirmPasswordInput" type="password" autocomplete="new-password"></div><button type="submit" id="passwordButton">잠금 해제</button><div class="error" id="passwordError"></div></form><div class="modal-divider" id="modalDivider"></div><button class="ghost" type="button" id="statusButton">재고 현황 파악</button><div id="loginStatusView" hidden><div id="loginStatusList"></div><button class="ghost status-back" type="button" id="backToLogin">로그인 화면으로 돌아가기</button></div></div></div><div class="modal-backdrop hidden" id="correctionModal"><div class="modal"><h2 id="correctionTitle">변경 이력 수정</h2><p id="correctionGuide"></p><form id="correctionForm"><input id="correctionIndex" type="hidden"><div id="correctionFields"></div><button type="submit">수정 반영</button><button class="ghost" type="button" id="closeCorrectionModal" style="margin-top:10px">취소</button></form></div></div><div class="modal-backdrop hidden" id="quantityModal"><div class="modal"><h2 id="quantityTitle">현재 수량 수정</h2><p id="quantityGuide">수정한 수량은 변경 이력에 기록됩니다.</p><form id="quantityForm"><input id="quantityStockId" type="hidden"><label for="quantityValue">현재 수량</label><input id="quantityValue" type="number" min="0" required><label for="quantityReason">수정 사유 (선택)</label><input id="quantityReason" placeholder="예: 실사 수량 반영"><button type="submit">수량 수정 반영</button><button class="ghost" type="button" id="closeQuantityModal" style="margin-top:10px">취소</button></form></div></div><div class="modal-backdrop hidden" id="replenishmentModal"><div class="modal"><h2 id="replenishmentTitle">보충 진행 상태</h2><p>재고 보충을 위한 현재 진행 상태를 선택하세요.</p><form id="replenishmentForm"><input id="replenishmentStockId" type="hidden"><label for="replenishmentStatus">진행 상태</label><select id="replenishmentStatus" required><option value="인쇄 진행 중">인쇄 진행 중</option><option value="인쇄 품의 중">인쇄 품의 중</option></select><button type="submit">완료</button><button class="ghost" type="button" id="closeReplenishmentModal" style="margin-top:10px">취소</button></form></div></div>
+  <div class="modal-backdrop hidden" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="imageTitle">
+    <div class="modal image-dialog"><button type="button" class="dialog-close" data-close="imageModal" aria-label="이미지 창 닫기">×</button><h2 id="imageTitle">품목 이미지</h2><p id="imageCategory"></p>
+      <div class="item-image-stage"><img id="itemImage" hidden alt="" referrerpolicy="no-referrer"><div class="image-empty" id="imageEmpty">등록된 품목 이미지가 없습니다.</div></div>
+      <form id="imageForm" hidden><label for="itemImageUrl">품목 이미지 주소 (HTTPS)</label><input type="url" id="itemImageUrl" placeholder="https://…/product.jpg" maxlength="2000"><p class="field-hint">팀원이 열 수 있는 이미지 주소를 입력하세요. 비워서 저장하면 이미지를 제거합니다.</p><button type="submit" id="saveImage">이미지 저장</button><p class="error" id="imageError" role="alert"></p></form>
+    </div>
+  </div>
+  <div class="modal-backdrop hidden" id="issueRequestModal" role="dialog" aria-modal="true" aria-labelledby="issueRequestTitle">
+    <div class="modal request-dialog"><button type="button" class="dialog-close" data-close="issueRequestModal" aria-label="불출 신청 창 닫기">×</button><h2 id="issueRequestTitle">불출 신청</h2><p id="issueRequestItem"></p>
+      <form id="issueRequestForm">
+        <label for="requesterName">신청자</label><input id="requesterName" autocomplete="name" maxlength="60" required>
+        <label for="requesterTeam">소속 / 부서</label><input id="requesterTeam" autocomplete="organization" maxlength="100" required>
+        <label for="requestQuantity">신청 수량</label><input id="requestQuantity" type="number" min="1" step="1" value="1" required>
+        <label for="requestPurpose">사용 목적</label><textarea id="requestPurpose" maxlength="500" rows="3" placeholder="예: 고객 미팅, 전시회 배포" required></textarea>
+        <p class="field-hint">신청 정보는 마케팅팀 관리자가 확인합니다. 신청 후 담당자의 확인을 기다려 주세요.</p>
+        <button type="submit" id="submitIssueRequest">불출 신청하기</button><p class="error" id="issueRequestError" role="alert"></p>
+      </form>
+      <div id="issueRequestSuccess" hidden role="status"><div class="success-mark">✓</div><h3>불출 신청이 접수되었습니다.</h3><p id="issueReceipt"></p><button type="button" class="ghost" data-close="issueRequestModal">닫기</button></div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
     const defaults=[{id:1,name:'SGA ZTA 브로슈어',category:'브로슈어',qty:180,threshold:50},{id:2,name:'VirusChaser 패키지박스',category:'패키지박스',qty:42,threshold:40},{id:3,name:'전시 기념 USB',category:'기념품',qty:95,threshold:100},{id:4,name:'회사 소개 브로슈어',category:'브로슈어',qty:320,threshold:80}];
     const categoryOrder=['브로슈어','기념품','쇼핑백','패키지박스'];let expandedCategory=localStorage.getItem('marketingExpandedCategory')||'브로슈어';
     const administrators=[{name:'엄은경',email:'ekeum@sgacorp.kr',id:'9b6de83c-fc61-4535-8775-bea49db608c0'},{name:'이윤지',email:'yj_lee@sgacorp.kr',id:'55a86f43-566f-4627-8428-a373c79690db'},{name:'어현선',email:'hseo@sgacorp.kr',id:'cfadfdb2-3749-4282-ae38-fed00a41e29c'}];
-    const SUPABASE_URL='https://rzcagogwznhfxvdvsfsb.supabase.co';const SUPABASE_PUBLISHABLE_KEY='sb_publishable_O_BT_WGxB0RhfkeFtUEgdw_mYxdQEU4';const db=SUPABASE_URL&&SUPABASE_PUBLISHABLE_KEY?window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY):null;let remoteItemIds=new Set(),remoteLogIds=new Set(),syncQueue=Promise.resolve();
-    let stocks=JSON.parse(localStorage.getItem('marketingStocks')||'null')||defaults;let logs=JSON.parse(localStorage.getItem('marketingLogs')||'[]');
-    const $=s=>document.querySelector(s);const esc=v=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));const uuid=()=>crypto.randomUUID();const save=()=>{localStorage.setItem('marketingStocks',JSON.stringify(stocks));localStorage.setItem('marketingLogs',JSON.stringify(logs));if(db)syncQueue=syncQueue.then(syncToSupabase).catch(error=>toast('Supabase 저장에 실패했습니다: '+error.message))};
-    async function syncToSupabase(){logs.forEach(log=>{log.recordId||=(uuid());log.occurredAt||=(new Date().toISOString())});const itemRows=stocks.map(s=>({id:s.id,name:s.name,category:s.category,qty:s.qty,threshold:s.threshold,replenishment_status:s.replenishmentStatus||null,updated_at:new Date().toISOString()})),logRows=logs.map(l=>({id:l.recordId,product:l.product,type:l.type||'변경',detail:l.detail||null,memo:l.memo||null,party:l.party||null,amount:l.amount??null,admin_name:l.admin||null,occurred_at:l.occurredAt}));const currentItems=new Set(stocks.map(s=>String(s.id))),currentLogs=new Set(logs.map(l=>l.recordId));if(itemRows.length){const {error}=await db.from('inventory_items').upsert(itemRows);if(error)throw error}if(logRows.length){const {error}=await db.from('inventory_logs').upsert(logRows);if(error)throw error}for(const id of remoteItemIds)if(!currentItems.has(String(id))){const {error}=await db.from('inventory_items').delete().eq('id',id);if(error)throw error}for(const id of remoteLogIds)if(!currentLogs.has(id)){const {error}=await db.from('inventory_logs').delete().eq('id',id);if(error)throw error}remoteItemIds=currentItems;remoteLogIds=currentLogs}
-    async function loadFromSupabase(){if(!db)return;const [{data:itemRows,error:itemError},{data:logRows,error:logError}]=await Promise.all([db.from('inventory_items').select('*'),db.from('inventory_logs').select('*').order('occurred_at',{ascending:false})]);if(itemError)throw itemError;if(logError)throw logError;if(itemRows.length){stocks=itemRows.map(s=>({...s,replenishmentStatus:s.replenishment_status||''}))}if(logRows.length){logs=logRows.map(l=>({recordId:l.id,product:l.product,type:l.type,detail:l.detail,memo:l.memo,party:l.party,amount:l.amount,admin:l.admin_name,when:new Date(l.occurred_at).toLocaleString('ko-KR'),occurredAt:l.occurred_at}))}remoteItemIds=new Set(itemRows.map(s=>String(s.id)));remoteLogIds=new Set(logRows.map(l=>l.id));if(!itemRows.length&&stocks.length)await syncToSupabase()}
-    const adminPasswordsKey='marketingInventoryAdminPasswords';let currentAdmin=null;const encodePassword=value=>btoa(unescape(encodeURIComponent(value)));function setupPasswordModal(){const select=$('#adminSelect');select.innerHTML=administrators.map((a,index)=>`<label><input type="radio" name="admin" value="${a.email}" ${index===0?'checked':''}>${a.name}</label>`).join('');const selectedAdmin=()=>administrators.find(a=>a.email===select.querySelector('input:checked')?.value);const refresh=()=>{const admin=selectedAdmin(),passwords=JSON.parse(localStorage.getItem(adminPasswordsKey)||'{}'),needsSetup=!db&&!passwords[admin.email];$('#passwordTitle').textContent=needsSetup?'관리자 비밀번호 설정':'관리자 인증';$('#passwordGuide').textContent=db?`${admin.name} 관리자 계정의 Supabase 비밀번호를 입력하세요.`:needsSetup?`${admin.name} 관리자의 비밀번호를 처음 설정합니다.`:`${admin.name} 관리자 비밀번호를 입력하세요.`;$('#passwordButton').textContent=needsSetup?'비밀번호 설정':'잠금 해제';$('#confirmPasswordWrap').hidden=!needsSetup;$('#passwordInput').autocomplete=needsSetup?'new-password':'current-password';$('#passwordError').textContent=''};select.onchange=refresh;refresh();$('#passwordForm').onsubmit=async e=>{e.preventDefault();const passwords=JSON.parse(localStorage.getItem(adminPasswordsKey)||'{}'),admin=selectedAdmin(),value=$('#passwordInput').value,confirmValue=$('#confirmPasswordInput').value;if(db){const {error}=await db.auth.signInWithPassword({email:admin.email,password:value});if(error)return $('#passwordError').textContent='Supabase 로그인에 실패했습니다. 관리자 계정과 비밀번호를 확인해 주세요.';try{await loadFromSupabase();startRealtime();render()}catch(error){return $('#passwordError').textContent=`재고 데이터를 불러오지 못했습니다: ${error.message||'알 수 없는 오류'}`}}else if(!passwords[admin.email]){if(value.length<4)return $('#passwordError').textContent='비밀번호는 4자 이상으로 설정해 주세요.';if(value!==confirmValue)return $('#passwordError').textContent='비밀번호 확인이 일치하지 않습니다.';passwords[admin.email]=encodePassword(value);localStorage.setItem(adminPasswordsKey,JSON.stringify(passwords))}else if(encodePassword(value)!==passwords[admin.email])return $('#passwordError').textContent='비밀번호가 일치하지 않습니다.';currentAdmin=admin;$('#resetPasswordsButton').hidden=currentAdmin.email!=='hseo@sgacorp.kr';$('#passwordModal').classList.add('hidden');$('#passwordError').textContent='';e.target.reset()}}
+    const SUPABASE_URL='https://rzcagogwznhfxvdvsfsb.supabase.co';const SUPABASE_PUBLISHABLE_KEY='sb_publishable_O_BT_WGxB0RhfkeFtUEgdw_mYxdQEU4';const cloudConfigured=!!(SUPABASE_URL&&SUPABASE_PUBLISHABLE_KEY);const db=cloudConfigured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY):null;let remoteItemIds=new Set(),remoteLogIds=new Set(),syncQueue=Promise.resolve();
+    let stocks=cloudConfigured?[]:(JSON.parse(localStorage.getItem('marketingStocks')||'null')||[]);let logs=cloudConfigured?[]:JSON.parse(localStorage.getItem('marketingLogs')||'[]');
+    const $=s=>document.querySelector(s);const esc=v=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));const uuid=()=>crypto.randomUUID();const save=()=>{if(!requireAdmin())return;localStorage.setItem('marketingStocks',JSON.stringify(stocks));localStorage.setItem('marketingLogs',JSON.stringify(logs));if(db)syncQueue=syncQueue.then(syncToSupabase).catch(error=>toast('Supabase 저장에 실패했습니다: '+error.message))};
+    async function syncToSupabase(){if(!currentAdmin)throw new Error('관리자 로그인이 필요합니다.');logs.forEach(log=>{log.recordId||=(uuid());log.occurredAt||=(new Date().toISOString())});const itemRows=stocks.map(s=>({id:s.id,name:s.name,category:s.category,qty:s.qty,threshold:s.threshold,replenishment_status:s.replenishmentStatus||null,updated_at:new Date().toISOString()})),logRows=logs.map(l=>({id:l.recordId,product:l.product,type:l.type||'변경',detail:l.detail||null,memo:l.memo||null,party:l.party||null,amount:l.amount??null,admin_name:l.admin||null,occurred_at:l.occurredAt}));const currentItems=new Set(stocks.map(s=>String(s.id))),currentLogs=new Set(logs.map(l=>l.recordId));if(itemRows.length){const {error}=await db.from('inventory_items').upsert(itemRows);if(error)throw error}if(logRows.length){const {error}=await db.from('inventory_logs').upsert(logRows);if(error)throw error}for(const id of remoteItemIds)if(!currentItems.has(String(id))){const {error}=await db.from('inventory_items').delete().eq('id',id);if(error)throw error}for(const id of remoteLogIds)if(!currentLogs.has(id)){const {error}=await db.from('inventory_logs').delete().eq('id',id);if(error)throw error}remoteItemIds=currentItems;remoteLogIds=currentLogs}
+    async function loadFromSupabase(){
+      if(!db)return;
+      const [{data:itemRows,error:itemError},{data:logRows,error:logError}]=await Promise.all([db.from('inventory_items').select('*'),db.from('inventory_logs').select('*').order('occurred_at',{ascending:false})]);
+      if(itemError)throw itemError;if(logError)throw logError;
+      stocks=(itemRows||[]).map(s=>({...s,replenishmentStatus:s.replenishment_status||''}));
+      logs=(logRows||[]).map(l=>({recordId:l.id,product:l.product,type:l.type,detail:l.detail,memo:l.memo,party:l.party,amount:l.amount,admin:l.admin_name,when:new Date(l.occurred_at).toLocaleString('ko-KR'),occurredAt:l.occurred_at}));
+      remoteItemIds=new Set(stocks.map(s=>String(s.id)));remoteLogIds=new Set(logs.map(l=>l.recordId));
+    }
+    const adminPasswordsKey='marketingInventoryAdminPasswords';
+    let currentAdmin=null,loginBusy=false,loginGeneration=0;
+    const encodePassword=value=>btoa(unescape(encodeURIComponent(value)));
+    function setupPasswordModal(){
+      const select=$('#adminSelect');
+      select.innerHTML=administrators.map((admin,index)=>'<label><input type="radio" name="admin" value="'+admin.email+'" '+(index===0?'checked':'')+'>'+admin.name+'</label>').join('');
+      const selectedAdmin=()=>administrators.find(admin=>admin.email===select.querySelector('input:checked')?.value);
+      const refresh=()=>{
+        const admin=selectedAdmin(),passwords=JSON.parse(localStorage.getItem(adminPasswordsKey)||'{}'),needsSetup=!cloudConfigured&&!passwords[admin.email];
+        $('#passwordTitle').textContent=needsSetup?'관리자 비밀번호 설정':'관리자 인증';
+        $('#passwordGuide').textContent=cloudConfigured?admin.name+' 관리자 계정의 비밀번호를 입력하세요.':needsSetup?admin.name+' 관리자의 비밀번호를 처음 설정합니다.':admin.name+' 관리자 비밀번호를 입력하세요.';
+        $('#passwordButton').textContent=needsSetup?'비밀번호 설정':'로그인';
+        $('#confirmPasswordWrap').hidden=!needsSetup;$('#passwordInput').autocomplete=needsSetup?'new-password':'current-password';
+        $('#passwordError').textContent='';
+      };
+      select.onchange=refresh;refresh();
+      $('#passwordForm').onsubmit=async event=>{
+        event.preventDefault();if(loginBusy)return;
+        const admin=selectedAdmin(),value=$('#passwordInput').value,confirmValue=$('#confirmPasswordInput').value,attempt=++loginGeneration;
+        loginBusy=true;$('#passwordButton').disabled=true;$('#passwordError').textContent='';
+        try{
+          if(cloudConfigured){
+            if(!db)throw new Error('로그인 연결을 불러오지 못했습니다. 새로고침해 주세요.');
+            const {data,error}=await db.auth.signInWithPassword({email:admin.email,password:value});
+            if(error)throw new Error('로그인에 실패했습니다. 관리자 계정과 비밀번호를 확인해 주세요.');
+            if(data?.user?.email?.toLowerCase()!==admin.email.toLowerCase())throw new Error('등록된 관리자 계정과 일치하지 않습니다.');
+            try{await loadFromSupabase();}catch(error){throw new Error('재고 데이터를 불러오지 못했습니다: '+(error.message||'알 수 없는 오류'));}
+          }else{
+            const passwords=JSON.parse(localStorage.getItem(adminPasswordsKey)||'{}');
+            if(!passwords[admin.email]){
+              if(value.length<4)throw new Error('비밀번호는 4자 이상으로 설정해 주세요.');
+              if(value!==confirmValue)throw new Error('비밀번호 확인이 일치하지 않습니다.');
+              passwords[admin.email]=encodePassword(value);localStorage.setItem(adminPasswordsKey,JSON.stringify(passwords));
+            }else if(encodePassword(value)!==passwords[admin.email])throw new Error('비밀번호가 일치하지 않습니다.');
+          }
+          if(attempt!==loginGeneration)return;
+          currentAdmin=admin;startRealtime();$('#passwordModal').classList.add('hidden');
+          event.target.reset();showAdminView();
+        }catch(error){if(attempt===loginGeneration)$('#passwordError').textContent=error.message||'로그인에 실패했습니다.';}
+        finally{loginBusy=false;$('#passwordButton').disabled=false;}
+      };
+    }
+    function openAdminLogin() {
+      // Reuse the existing authentication screen, including Supabase sign-in.
+      $('#passwordForm').hidden = false;
+      $('#modalDivider').hidden = false;
+      $('#statusButton').hidden = false;
+      $('#loginStatusView').hidden = true;
+      $('#modalCard').classList.remove('status-open');
+      $('#passwordInput').value = '';
+      $('#confirmPasswordInput').value = '';
+      setupPasswordModal();
+      $('#passwordModal').classList.remove('hidden');
+      $('#passwordInput').focus();
+    }
+    $('#adminLoginButton').addEventListener('click',()=>currentAdmin?showAdminView():openAdminLogin());
     const formatDate=date=>`${String(date.getFullYear()).slice(-2)}년 ${date.getMonth()+1}월 ${date.getDate()}일(${['일','월','화','수','목','금','토'][date.getDay()]})`;const formatLogDate=value=>{const match=String(value).match(/(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/);return match?formatDate(new Date(+match[1],+match[2]-1,+match[3])):'기록 없음'};
     const status=s=>s.qty<=s.threshold?(s.qty===0?['danger','재고 없음']:['low','보충 필요']):['safe','정상'];
-    function render(){const table=$('#stockTable'),select=$('#product'),thresholdSelect=$('#thresholdProduct'),selectedProduct=select.value,selectedThreshold=thresholdSelect.value;table.querySelectorAll('tbody').forEach(e=>e.remove());select.innerHTML='';thresholdSelect.innerHTML='';const categories=[...categoryOrder,...stocks.map(s=>s.category).filter(c=>!categoryOrder.includes(c))];categories.forEach(category=>{const items=stocks.filter(s=>s.category===category);const low=items.filter(s=>s.qty<=s.threshold).length;const open=expandedCategory===category;const body=document.createElement('tbody');body.innerHTML=`<tr class="category-row"><td colspan="5"><button type="button" class="category-toggle ${open?'':'collapsed'}" onclick="toggleCategory('${esc(category)}')"><span class="left"><span class="arrow">⌄</span><span>${esc(category)}</span><small>${items.length}개 품목 · ${items.reduce((sum,s)=>sum+s.qty,0).toLocaleString()}개 보유</small></span><small class="${low?'alert':''}">${low?`보충 필요 ${low}개`:items.length?'정상':'등록 품목 없음'}</small></button></td></tr>`;if(open)items.forEach(s=>{let [c,t]=status(s),needs=s.qty<=s.threshold,statusView=needs?`<button type="button" class="status ${c} status-action" onclick="openReplenishment(${s.id})">${t}</button>${s.replenishmentStatus?`<small class="status-note">${esc(s.replenishmentStatus)}</small>`:''}`:`<span class="status ${c}">${t}</span>`;body.insertAdjacentHTML('beforeend',`<tr class="${needs?'needs-replenishment':''}"><td><span class="product">${esc(s.name)}</span></td><td><button type="button" class="qty-edit" onclick="openQuantityEdit(${s.id})" aria-label="${esc(s.name)} 현재 수량 수정">${s.qty.toLocaleString()}개</button></td><td>${s.threshold.toLocaleString()}개 이하</td><td>${statusView}</td><td><button class="ghost" onclick="removeProduct(${s.id})" style="color:#bd2635;background:#ffeaec">삭제</button></td></tr>`)});table.appendChild(body)});stocks.forEach(s=>{const opt=`<option value="${s.id}">${esc(s.name)} (현재 ${s.qty}개)</option>`;select.insertAdjacentHTML('beforeend',opt);thresholdSelect.insertAdjacentHTML('beforeend',opt)});if([...select.options].some(o=>o.value===selectedProduct))select.value=selectedProduct;if([...thresholdSelect.options].some(o=>o.value===selectedThreshold))thresholdSelect.value=selectedThreshold;const selectedStock=stocks.find(s=>s.id===+thresholdSelect.value),lowStocks=stocks.filter(s=>s.qty<=s.threshold);$('#thresholdAmount').value=selectedStock?selectedStock.threshold:0;$('#itemCount').textContent=stocks.length+'개';$('#lowCount').textContent=lowStocks.length+'개';$('#lowNames').textContent=lowStocks.length?lowStocks.map(s=>s.name).join(' · '):'현재 보충 필요 품목이 없습니다.';$('#today').textContent=`${formatDate(new Date())} | 마지막 업데이트: ${logs.length?formatLogDate(logs[0].when):'기록 없음'}`;$('#logs').innerHTML=logs.length?logs.slice(0,8).map(l=>`<div><b>${esc(l.product)}</b> · ${esc(l.type||'변경')} · ${esc(l.admin||'기존 기록')}<br>${esc(l.detail||`${l.amount}개 ${l.party||l.recipient||''}`)}${l.memo?` · ${esc(l.memo)}`:''}<br>${esc(l.when)}</div>`).join(''):'<div>아직 등록된 변경 이력이 없습니다.</div>'}
-    window.focusIssue=id=>{$('#transactionType').value='불출';updateTransactionMode();$('#product').value=id;$('#amount').focus();window.scrollTo({top:250,behavior:'smooth'})};
+    function render(){const table=$('#stockTable'),select=$('#product'),thresholdSelect=$('#thresholdProduct'),selectedProduct=select.value,selectedThreshold=thresholdSelect.value;table.querySelectorAll('tbody').forEach(e=>e.remove());select.innerHTML='';thresholdSelect.innerHTML='';const categories=[...categoryOrder,...stocks.map(s=>s.category).filter(c=>!categoryOrder.includes(c))];categories.forEach(category=>{const items=stocks.filter(s=>s.category===category);const low=items.filter(s=>s.qty<=s.threshold).length;const open=expandedCategory===category;const body=document.createElement('tbody');body.innerHTML=`<tr class="category-row"><td colspan="5"><button type="button" class="category-toggle ${open?'':'collapsed'}" onclick="toggleCategory('${esc(category)}')"><span class="left"><span class="arrow">⌄</span><span>${esc(category)}</span><small>${items.length}개 품목 · ${items.reduce((sum,s)=>sum+s.qty,0).toLocaleString()}개 보유</small></span><small class="${low?'alert':''}">${low?`보충 필요 ${low}개`:items.length?'정상':'등록 품목 없음'}</small></button></td></tr>`;if(open)items.forEach(s=>{let [c,t]=status(s),needs=s.qty<=s.threshold,statusView=needs?`<button type="button" class="status ${c} status-action" onclick="openReplenishment(${s.id})">${t}</button>${s.replenishmentStatus?`<small class="status-note">${esc(s.replenishmentStatus)}</small>`:''}`:`<span class="status ${c}">${t}</span>`;body.insertAdjacentHTML('beforeend',`<tr class="${needs?'needs-replenishment':''}"><td><button type="button" class="item-name-button" data-image-id="${esc(s.id)}">${esc(s.name)}<small>이미지 보기 / 등록</small></button></td><td><button type="button" class="qty-edit" onclick="openQuantityEdit(${s.id})" aria-label="${esc(s.name)} 현재 수량 수정">${s.qty.toLocaleString()}개</button></td><td>${s.threshold.toLocaleString()}개 이하</td><td>${statusView}</td><td><button class="ghost" onclick="removeProduct(${s.id})" style="color:#bd2635;background:#ffeaec">삭제</button></td></tr>`)});table.appendChild(body)});stocks.forEach(s=>{const opt=`<option value="${s.id}">${esc(s.name)} (현재 ${s.qty}개)</option>`;select.insertAdjacentHTML('beforeend',opt);thresholdSelect.insertAdjacentHTML('beforeend',opt)});if([...select.options].some(o=>o.value===selectedProduct))select.value=selectedProduct;if([...thresholdSelect.options].some(o=>o.value===selectedThreshold))thresholdSelect.value=selectedThreshold;const selectedStock=stocks.find(s=>s.id===+thresholdSelect.value),lowStocks=stocks.filter(s=>s.qty<=s.threshold);$('#thresholdAmount').value=selectedStock?selectedStock.threshold:0;$('#itemCount').textContent=stocks.length+'개';$('#lowCount').textContent=lowStocks.length+'개';$('#lowNames').textContent=lowStocks.length?lowStocks.map(s=>s.name).join(' · '):'현재 보충 필요 품목이 없습니다.';$('#today').textContent=`${formatDate(new Date())} | 마지막 업데이트: ${logs.length?formatLogDate(logs[0].when):'기록 없음'}`;$('#logs').innerHTML=logs.length?logs.slice(0,8).map(l=>`<div><b>${esc(l.product)}</b> · ${esc(l.type||'변경')} · ${esc(l.admin||'기존 기록')}<br>${esc(l.detail||`${l.amount}개 ${l.party||l.recipient||''}`)}${l.memo?` · ${esc(l.memo)}`:''}<br>${esc(l.when)}</div>`).join(''):'<div>아직 등록된 변경 이력이 없습니다.</div>'}
+    window.focusIssue=id=>{if(!requireAdmin())return;$('#transactionType').value='불출';updateTransactionMode();$('#product').value=id;$('#amount').focus();window.scrollTo({top:250,behavior:'smooth'})};
     window.toggleCategory=category=>{expandedCategory=category;localStorage.setItem('marketingExpandedCategory',expandedCategory);render()};
-    window.removeProduct=id=>{const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('삭제할 품목을 찾을 수 없습니다.');stocks=stocks.filter(x=>String(x.id)!==String(id));logs.unshift({type:'품목 삭제',product:s.name,detail:`${s.category} · 삭제 당시 재고 ${s.qty}개`,admin:currentAdmin?.name||'미지정',when:new Date().toLocaleString('ko-KR')});save();render();toast(`${s.name} 품목을 삭제했습니다.`)};
-    window.openQuantityEdit=id=>{const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('수정할 품목을 찾을 수 없습니다.');$('#quantityStockId').value=s.id;$('#quantityTitle').textContent=`${s.name} · 현재 수량 수정`;$('#quantityValue').value=s.qty;$('#quantityReason').value='';$('#quantityModal').classList.remove('hidden');$('#quantityValue').focus()};
-    window.openReplenishment=id=>{const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('품목을 찾을 수 없습니다.');$('#replenishmentStockId').value=s.id;$('#replenishmentTitle').textContent=`${s.name} · 보충 진행 상태`;$('#replenishmentStatus').value=s.replenishmentStatus||'인쇄 진행 중';$('#replenishmentModal').classList.remove('hidden')};
+    window.removeProduct=id=>{if(!requireAdmin())return;const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('삭제할 품목을 찾을 수 없습니다.');stocks=stocks.filter(x=>String(x.id)!==String(id));logs.unshift({type:'품목 삭제',product:s.name,detail:`${s.category} · 삭제 당시 재고 ${s.qty}개`,admin:currentAdmin?.name||'미지정',when:new Date().toLocaleString('ko-KR')});save();render();toast(`${s.name} 품목을 삭제했습니다.`)};
+    window.openQuantityEdit=id=>{if(!requireAdmin())return;const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('수정할 품목을 찾을 수 없습니다.');$('#quantityStockId').value=s.id;$('#quantityTitle').textContent=`${s.name} · 현재 수량 수정`;$('#quantityValue').value=s.qty;$('#quantityReason').value='';$('#quantityModal').classList.remove('hidden');$('#quantityValue').focus()};
+    window.openReplenishment=id=>{if(!requireAdmin())return;const s=stocks.find(x=>String(x.id)===String(id));if(!s)return toast('품목을 찾을 수 없습니다.');$('#replenishmentStockId').value=s.id;$('#replenishmentTitle').textContent=`${s.name} · 보충 진행 상태`;$('#replenishmentStatus').value=s.replenishmentStatus||'인쇄 진행 중';$('#replenishmentModal').classList.remove('hidden')};
     function toast(m){$('#toast').textContent=m;$('#toast').classList.add('on');setTimeout(()=>$('#toast').classList.remove('on'),4200)}
     const editableTypes=['입고','출고','불출','신규 품목 등록','신규 등록','알림 기준 변경'];const logAmount=log=>Number(log.amount??String(log.detail||'').match(/\d+/)?.[0]??0);const productOptions=selected=>stocks.map(s=>`<option value="${s.id}" ${s.name===selected?'selected':''}>${esc(s.name)}</option>`).join('');
-    window.openCorrection=index=>{const log=logs[index];if(!log||!editableTypes.includes(log.type))return toast('이 변경 이력은 수정할 수 없습니다.');const stock=stocks.find(s=>s.name===log.product),type=log.type==='불출'?'출고':log.type;$('#correctionIndex').value=index;$('#correctionTitle').textContent=`${log.product} · ${type} 수정`;$('#correctionGuide').textContent='수정 내용은 현재 재고와 변경 이력에 즉시 반영됩니다.';let fields='';if(type==='입고'||type==='출고'){if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editProduct">품목</label><select id="editProduct" required>${productOptions(log.product)}</select><label for="editAmount">수량</label><input id="editAmount" type="number" min="1" value="${logAmount(log)}" required><label for="editParty">${type==='입고'?'입고처':'출고처'}</label><input id="editParty" value="${esc(log.party||'')}" required><label for="editMemo">메모</label><input id="editMemo" value="${esc(log.memo||'')}">`}else if(type==='신규 품목 등록'||type==='신규 등록'){if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editName">품목명</label><input id="editName" value="${esc(stock.name)}" required><label for="editCategory">카테고리</label><select id="editCategory"><option>브로슈어</option><option>기념품</option><option>쇼핑백</option><option>패키지박스</option></select><label for="editQuantity">현재 수량</label><input id="editQuantity" type="number" min="0" value="${stock.qty}" required><label for="editThreshold">알림 기준 수량</label><input id="editThreshold" type="number" min="0" value="${stock.threshold}" required>`;setTimeout(()=>$('#editCategory').value=stock.category)}else{if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editProduct">품목</label><select id="editProduct" required>${productOptions(log.product)}</select><label for="editThreshold">알림 기준 수량</label><input id="editThreshold" type="number" min="0" value="${stock.threshold}" required>`}$('#correctionFields').innerHTML=fields;$('#correctionModal').classList.remove('hidden')};
+    window.openCorrection=index=>{if(!requireAdmin())return;const log=logs[index];if(!log||!editableTypes.includes(log.type))return toast('이 변경 이력은 수정할 수 없습니다.');const stock=stocks.find(s=>s.name===log.product),type=log.type==='불출'?'출고':log.type;$('#correctionIndex').value=index;$('#correctionTitle').textContent=`${log.product} · ${type} 수정`;$('#correctionGuide').textContent='수정 내용은 현재 재고와 변경 이력에 즉시 반영됩니다.';let fields='';if(type==='입고'||type==='출고'){if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editProduct">품목</label><select id="editProduct" required>${productOptions(log.product)}</select><label for="editAmount">수량</label><input id="editAmount" type="number" min="1" value="${logAmount(log)}" required><label for="editParty">${type==='입고'?'입고처':'출고처'}</label><input id="editParty" value="${esc(log.party||'')}" required><label for="editMemo">메모</label><input id="editMemo" value="${esc(log.memo||'')}">`}else if(type==='신규 품목 등록'||type==='신규 등록'){if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editName">품목명</label><input id="editName" value="${esc(stock.name)}" required><label for="editCategory">카테고리</label><select id="editCategory"><option>브로슈어</option><option>기념품</option><option>쇼핑백</option><option>패키지박스</option></select><label for="editQuantity">현재 수량</label><input id="editQuantity" type="number" min="0" value="${stock.qty}" required><label for="editThreshold">알림 기준 수량</label><input id="editThreshold" type="number" min="0" value="${stock.threshold}" required>`;setTimeout(()=>$('#editCategory').value=stock.category)}else{if(!stock)return toast('현재 재고에서 해당 품목을 찾을 수 없습니다.');fields=`<label for="editProduct">품목</label><select id="editProduct" required>${productOptions(log.product)}</select><label for="editThreshold">알림 기준 수량</label><input id="editThreshold" type="number" min="0" value="${stock.threshold}" required>`}$('#correctionFields').innerHTML=fields;$('#correctionModal').classList.remove('hidden')};
     $('#closeCorrectionModal').addEventListener('click',()=>$('#correctionModal').classList.add('hidden'));
     $('#correctionForm').insertAdjacentHTML('beforeend','<button class="ghost" type="button" id="clearCorrectionFields" style="margin-top:10px">입력 내용 지우기</button>');
     $('#correctionForm').insertAdjacentHTML('beforeend','<button type="button" id="deleteHistoryEntry" style="margin-top:10px;background:#bd2635">변경 이력 완전 삭제</button>');
@@ -60,7 +214,7 @@
     const historyObserver=new MutationObserver(()=>{[...$('#logs').children].forEach((entry,index)=>{if(logs[index]&&editableTypes.includes(logs[index].type)&&!entry.querySelector('.edit-log')){const button=document.createElement('button');button.type='button';button.className='ghost edit-log';button.style.cssText='margin-top:8px;padding:5px 9px;font-size:12px';button.textContent='수정';button.onclick=()=>openCorrection(index);entry.appendChild(button)}})});historyObserver.observe($('#logs'),{childList:true});
     function openStatusWindow(){const total=stocks.reduce((sum,s)=>sum+s.qty,0),low=stocks.filter(s=>s.qty<=s.threshold).length,groups=categoryOrder.map(category=>({category,qty:stocks.filter(s=>s.category===category).reduce((sum,s)=>sum+s.qty,0)})),max=Math.max(1,...groups.map(g=>g.qty)),popup=window.open('','inventory-status','width=920,height=700,resizable=yes,scrollbars=yes');if(!popup)return toast('새 창이 차단되었습니다. 팝업 허용 후 다시 시도해 주세요.');const bars=groups.map(g=>`<div class="bar-row"><span>${esc(g.category)}</span><div class="track"><div class="fill" style="width:${Math.round(g.qty/max*100)}%"></div></div><b>${g.qty.toLocaleString()}개</b></div>`).join('');popup.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>마케팅팀 자산 재고 현황</title><style>body{margin:0;background:#f5f7fb;color:#152238;font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}.wrap{max-width:820px;margin:0 auto;padding:42px 28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.2px;color:#1463e8}h1{font-size:28px;margin:8px 0}p{color:#6b778c;margin:0 0 26px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}.card,.chart{background:#fff;border:1px solid #e5eaf1;border-radius:14px;padding:20px}.card span{font-size:13px;color:#6b778c}.card b{display:block;font-size:26px;margin-top:8px}.chart h2{font-size:17px;margin:0 0 20px}.bar-row{display:grid;grid-template-columns:120px 1fr 62px;gap:12px;align-items:center;margin:16px 0;font-size:14px}.track{height:14px;background:#e9eef7;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#1463e8,#06b6d4);border-radius:99px}@media(max-width:600px){.summary{grid-template-columns:1fr}.bar-row{grid-template-columns:88px 1fr 48px}}</style></head><body><main class="wrap"><div class="eyebrow">MARKETING OPERATIONS</div><h1>현재 재고 현황</h1><p>${formatDate(new Date())} 기준</p><section class="summary"><div class="card"><span>관리 품목</span><b>${stocks.length}개</b></div><div class="card"><span>총 보유 수량</span><b>${total.toLocaleString()}개</b></div><div class="card"><span>보충 필요 품목</span><b>${low}개</b></div></section><section class="chart"><h2>카테고리별 현재 재고</h2>${bars}</section></main></body></html>`);popup.document.close();popup.focus()}
     function openStatusModal(){const total=stocks.reduce((sum,s)=>sum+s.qty,0),low=stocks.filter(s=>s.qty<=s.threshold).length,groups=categoryOrder.map(category=>({category,qty:stocks.filter(s=>s.category===category).reduce((sum,s)=>sum+s.qty,0)})),max=Math.max(1,...groups.map(g=>g.qty));$('#statusModalDate').textContent=`${formatDate(new Date())} 기준`;$('#statusSummary').innerHTML=`<div>관리 품목<b>${stocks.length}개</b></div><div>총 보유 수량<b>${total.toLocaleString()}개</b></div><div>보충 필요 품목<b>${low}개</b></div>`;$('#statusChart').innerHTML=groups.map(g=>`<div class="bar-row"><span>${esc(g.category)}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(g.qty/max*100)}%"></div></div><b>${g.qty.toLocaleString()}개</b></div>`).join('');$('#statusModal').classList.remove('hidden')}
-    $('#resetPasswordsButton').addEventListener('click',()=>{if(currentAdmin?.email!=='hseo@sgacorp.kr')return toast('비밀번호 초기화 권한이 없습니다.');localStorage.removeItem(adminPasswordsKey);localStorage.removeItem('marketingInventoryPassword');currentAdmin=null;$('#resetPasswordsButton').hidden=true;$('#passwordModal').classList.remove('hidden');$('#passwordInput').value='';$('#confirmPasswordInput').value='';setupPasswordModal();toast('관리자 비밀번호를 초기화했습니다.')});
+    $('#resetPasswordsButton').addEventListener('click',()=>{if(currentAdmin?.email!=='hseo@sgacorp.kr')return toast('비밀번호 초기화 권한이 없습니다.');if(db)return toast('Supabase 계정의 비밀번호 재설정은 Supabase Authentication에서 진행해 주세요.');localStorage.removeItem(adminPasswordsKey);localStorage.removeItem('marketingInventoryPassword');currentAdmin=null;showPublicView();$('#resetPasswordsButton').hidden=true;$('#passwordModal').classList.remove('hidden');$('#passwordInput').value='';$('#confirmPasswordInput').value='';setupPasswordModal();toast('관리자 비밀번호를 초기화했습니다.')});
     async function notify(s){const url=localStorage.getItem('teamsWebhook');const msg=`[재고 보충 알림] ${s.name}의 현재 재고가 ${s.qty}개로 알림 기준(${s.threshold}개 이하)에 도달했습니다. 보충 여부를 확인해 주세요.`;if(!url){toast(msg+' 관리자 알림 URL을 등록하면 Teams로도 발송됩니다.');return}try{await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:msg,product:s.name,currentQuantity:s.qty,threshold:s.threshold,recipients:administrators})});toast('지정 관리자 3명에게 Teams 알림을 요청했습니다: '+s.name)}catch{toast('Teams 알림 요청에 실패했습니다. 워크플로 URL을 확인해 주세요.')}}
     function updateTransactionMode(){const isIssue=$('#transactionType').value==='불출';$('#amountLabel').textContent=isIssue?'불출':'입고';$('#partyLabel').textContent=isIssue?'불출처':'입고처';$('#recipient').placeholder=isIssue?'예: 영업1팀':'예: 제작업체';$('#memo').placeholder=isIssue?'예: 7월 고객 미팅':'예: 7월 추가 제작분';$('#transactionButton').textContent=isIssue?'불출 반영하기':'입고 반영하기';$('#transactionButton').style.background=isIssue?'':'#087d56'}
     $('#transactionType').addEventListener('change',updateTransactionMode);
@@ -70,6 +224,233 @@
     $('#thresholdForm').addEventListener('submit',async e=>{e.preventDefault();const s=stocks.find(x=>x.id===+$('#thresholdProduct').value),previous=s.threshold;s.threshold=+$('#thresholdAmount').value;logs.unshift({type:'알림 기준 변경',product:s.name,detail:`알림 기준 ${previous}개 → ${s.threshold}개`,admin:currentAdmin?.name||'미지정',when:new Date().toLocaleString('ko-KR')});save();render();toast(`${s.name}의 알림 기준을 ${s.threshold}개로 저장했습니다.`);if(s.qty<=s.threshold)await notify(s)});
     $('#downloadLogs').addEventListener('click',()=>{const rows=[['일시','구분','품목','변경 내용','관리자','메모'],...logs.map(l=>[l.when,l.type||'변경',l.product,l.detail||`${l.amount||''}개 ${l.party||l.recipient||''}`,l.admin||'',l.memo||''])];const csv='\ufeff'+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""').replace(/\r?\n/g,' ')}"`).join(',')).join('\r\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`마케팅자산_변경이력_${new Date().toISOString().slice(0,10)}.csv`;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},1000);toast('변경 이력 파일을 내려받았습니다.')});
     const dateObserver=new MutationObserver(()=>{const text=$('#today').textContent,parts=text.split(' | ');if(parts.length===2)$('#today').innerHTML=`<span>${parts[0]}</span><span>${parts[1]}</span>`});dateObserver.observe($('#today'),{childList:true,characterData:true,subtree:true});
-    $('#saveSetting').addEventListener('click',()=>{localStorage.setItem('teamsWebhook',$('#webhook').value.trim());toast('Teams 알림 설정을 저장했습니다.')});$('#webhook').value=localStorage.getItem('teamsWebhook')||'';let realtimeStarted=false;function startRealtime(){if(!db||realtimeStarted)return;realtimeStarted=true;db.channel('marketing-inventory').on('postgres_changes',{event:'*',schema:'public',table:'inventory_items'},async()=>{await loadFromSupabase();render()}).on('postgres_changes',{event:'*',schema:'public',table:'inventory_logs'},async()=>{await loadFromSupabase();render()}).subscribe()}async function bootstrap(){if(db){const {data:{session}}=await db.auth.getSession();if(session)try{await loadFromSupabase();startRealtime()}catch(error){toast('Supabase 연결에 실패했습니다. 설정값과 로그인 권한을 확인해 주세요.')}}render();updateTransactionMode();setupPasswordModal()}bootstrap();
+    $('#saveSetting').addEventListener('click',()=>{if(!requireAdmin())return;localStorage.setItem('teamsWebhook',$('#webhook').value.trim());toast('Teams 알림 설정을 저장했습니다.')});
+    $('#webhook').value=localStorage.getItem('teamsWebhook')||'';
+    let realtimeStarted=false;
+    function startRealtime(){
+      if(!db||realtimeStarted)return;
+      realtimeStarted=true;
+      const refreshAdmin=async()=>{if(!currentAdmin)return;try{await syncQueue;await loadFromSupabase();if(currentAdmin)render();}catch(error){toast('재고 갱신에 실패했습니다: '+error.message)}};
+      db.channel('marketing-inventory').on('postgres_changes',{event:'*',schema:'public',table:'inventory_items'},refreshAdmin).on('postgres_changes',{event:'*',schema:'public',table:'inventory_logs'},refreshAdmin).subscribe();
+    }
+
+    let publicStocks=[], publicLoaded=false, publicLoading=false, publicFresh=false, publicUpdatedAt=null;
+    let selectedImageId=null, requestItemId=null, requestKey=null, requestBusy=false, imageBusy=false;
+    const modalReturnTargets=new Map();
+    function requireAdmin(){if(currentAdmin)return true;openAdminLogin();return false;}
+    function setPublicMessage(text,error=false){
+      const message=$('#publicMessage');message.textContent=text;message.hidden=!text;message.classList.toggle('error',error);
+    }
+    function showPublicView(){
+      $('#adminView').hidden=true;$('#publicView').hidden=false;$('#resetPasswordsButton').hidden=true;
+      loadPublicInventory();
+    }
+    function showAdminView(){
+      if(!requireAdmin())return;
+      $('#publicView').hidden=true;$('#adminView').hidden=false;
+      $('#adminIdentity').textContent=currentAdmin.name+' 관리자 · 품목명을 눌러 이미지를 등록할 수 있습니다.';
+      $('#resetPasswordsButton').hidden=!!db||currentAdmin.email!=='hseo@sgacorp.kr';
+      render();loadIssueRequests();
+    }
+    function renderPublic(){
+      $('#monitorGrid').innerHTML=categoryOrder.map((category,index)=>{
+        const items=publicStocks.filter(item=>item.category===category);
+        const total=publicLoaded?items.reduce((sum,item)=>sum+item.qty,0).toLocaleString():'—';
+        const rows=items.map(item=>'<tr><td><button type="button" class="item-name-button" data-image-id="'+esc(item.id)+'">'+esc(item.name)+'<small>이미지 보기</small></button></td><td class="qty">'+item.qty.toLocaleString()+'개</td><td><button type="button" class="issue-request-button" data-request-id="'+esc(item.id)+'" '+(!publicFresh||item.qty<1?'disabled':'')+' aria-label="'+esc(item.name)+' 불출 신청">'+(item.qty<1?'재고 없음':'불출 신청')+'</button></td></tr>').join('');
+        const emptyText=publicLoaded?'등록된 품목이 없습니다.':publicLoading?'재고 확인 중…':'재고 정보를 확인할 수 없습니다.';
+        return '<section class="monitor-card" aria-labelledby="categoryTitle'+index+'"><div class="monitor-card-head"><div><span class="category-label">INVENTORY / 0'+(index+1)+'</span><h3 id="categoryTitle'+index+'">'+esc(category)+'</h3></div><div class="category-total"><strong>'+total+'</strong><span>총 보유 수량 · 개</span></div></div>'+(items.length?'<table class="monitor-table"><thead><tr><th scope="col">품목</th><th scope="col">수량</th><th scope="col">불출 신청</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="empty-category">'+emptyText+'</div>')+'</section>';
+      }).join('');
+      const time=publicUpdatedAt?'조회: '+publicUpdatedAt.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}):'';
+      if(!$('#publicView').hidden)$('#today').textContent=formatDate(new Date())+(time?' | '+time:'');
+    }
+    async function loadPublicInventory(){
+      if(publicLoading)return;
+      publicLoading=true;$('#refreshPublic').disabled=true;
+      if(!publicLoaded)setPublicMessage('재고 정보를 불러오는 중입니다.');
+      renderPublic();
+      try{
+        let rows;
+        if(cloudConfigured){
+          if(!db)throw new Error('연결 모듈을 불러오지 못했습니다.');
+          const result=await db.rpc('inventory_monitor_v1');
+          if(result.error)throw result.error;
+          if(!Array.isArray(result.data))throw new Error('재고 응답 형식이 올바르지 않습니다.');
+          rows=result.data;
+        }else rows=stocks;
+        publicStocks=rows.map(item=>{
+          const qty=Number(item.qty);
+          if(item.id==null||!Number.isSafeInteger(qty)||qty<0)throw new Error('재고 수량을 확인할 수 없습니다.');
+          return {id:String(item.id),name:String(item.name),category:item.category,qty,image_url:item.image_url||'',updated_at:item.updated_at};
+        });
+        publicLoaded=true;publicFresh=true;publicUpdatedAt=new Date();
+        setPublicMessage(cloudConfigured?'':'이 브라우저에 저장된 재고입니다. 공동 조회와 신청 접수는 연결 설정 후 사용할 수 있습니다.');
+      }catch(error){
+        publicFresh=false;
+        setPublicMessage(publicLoaded?'재고 갱신에 실패해 이전 조회 수량을 표시하고 있습니다. 새로고침 후 신청해 주세요.':'재고 정보를 불러오지 못했습니다. 잠시 후 새로고침하거나 관리자에게 문의해 주세요.',true);
+        if(currentAdmin)$('#requestList').textContent='일반 화면 연결 확인이 필요합니다. 추가 설정 SQL 실행 여부를 확인해 주세요. '+(error.message||'');
+      }finally{
+        publicLoading=false;$('#refreshPublic').disabled=false;renderPublic();
+      }
+    }
+    function openDialog(id){
+      modalReturnTargets.set(id,document.activeElement);
+      $('#'+id).classList.remove('hidden');
+      const target=$('#'+id).querySelector('input:not([type="hidden"]),button');
+      if(target)target.focus();
+    }
+    function closeDialog(id){
+      if((id==='issueRequestModal'&&requestBusy)||(id==='imageModal'&&imageBusy))return;
+      $('#'+id).classList.add('hidden');
+      if(id==='passwordModal'){loginGeneration++;$('#passwordInput').value='';$('#confirmPasswordInput').value='';}
+      const target=modalReturnTargets.get(id);
+      if(target?.isConnected)target.focus();else if(id==='passwordModal')$('#adminLoginButton').focus();
+    }
+    function safeImageUrl(value){
+      if(!value)return '';
+      try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password?url.href:'';}catch{return '';}
+    }
+    function displayItemImage(url,name){
+      const img=$('#itemImage'),empty=$('#imageEmpty'),safe=safeImageUrl(url);
+      img.hidden=true;img.removeAttribute('src');empty.hidden=false;
+      empty.textContent=safe?'이미지를 불러오는 중입니다.':'등록된 품목 이미지가 없습니다.';
+      img.alt=name+' 이미지';
+      img.onload=()=>{img.hidden=false;empty.hidden=true;};
+      img.onerror=()=>{img.hidden=true;empty.hidden=false;empty.textContent='이미지를 불러올 수 없습니다. 관리자에게 문의해 주세요.';};
+      if(safe)img.src=safe;
+    }
+    function openItemImage(id,editing=false){
+      const item=(editing?stocks:publicStocks).find(item=>String(item.id)===String(id));
+      if(!item)return;
+      selectedImageId=String(item.id);
+      $('#imageTitle').textContent=item.name;$('#imageCategory').textContent=item.category;
+      $('#imageForm').hidden=!(editing&&currentAdmin);
+      $('#itemImageUrl').value=item.image_url||'';$('#imageError').textContent='';
+      displayItemImage(item.image_url,item.name);openDialog('imageModal');
+    }
+    $('#imageForm').addEventListener('submit',async event=>{
+      event.preventDefault();if(imageBusy||!requireAdmin())return;
+      const value=$('#itemImageUrl').value.trim(),url=safeImageUrl(value);
+      if(value&&!url){$('#imageError').textContent='HTTPS 이미지 주소를 입력해 주세요.';return;}
+      imageBusy=true;$('#saveImage').disabled=true;$('#imageError').textContent='';
+      try{
+        if(cloudConfigured){
+          if(!db)throw new Error('연결을 확인해 주세요.');
+          const {error}=await db.rpc('inventory_set_image_v1',{p_item_id:selectedImageId,p_image_url:url||null});
+          if(error)throw error;
+        }
+        const item=stocks.find(item=>String(item.id)===selectedImageId);
+        if(!item)throw new Error('품목을 찾을 수 없습니다.');
+        item.image_url=url;
+        if(!cloudConfigured)localStorage.setItem('marketingStocks',JSON.stringify(stocks));
+        displayItemImage(url,item.name);await loadPublicInventory();toast('품목 이미지를 저장했습니다.');
+      }catch(error){$('#imageError').textContent='이미지 저장에 실패했습니다. 추가 설정 SQL 실행 여부를 확인해 주세요. '+(error.message||'');}
+      finally{imageBusy=false;$('#saveImage').disabled=false;}
+    });
+    function openIssueRequest(id){
+      if(!publicFresh)return toast('최신 재고를 조회한 후 신청해 주세요.');
+      const item=publicStocks.find(item=>String(item.id)===String(id));
+      if(!item||item.qty<1)return toast('현재 신청할 수 있는 재고가 없습니다.');
+      requestItemId=String(item.id);requestKey=uuid();
+      $('#issueRequestForm').reset();$('#requestQuantity').max=String(item.qty);
+      $('#issueRequestForm').hidden=false;$('#issueRequestSuccess').hidden=true;
+      $('#issueRequestError').textContent='';$('#issueReceipt').textContent='';
+      $('#issueRequestItem').textContent=item.name+' · 현재 '+item.qty.toLocaleString()+'개';
+      openDialog('issueRequestModal');
+    }
+    $('#issueRequestForm').addEventListener('submit',async event=>{
+      event.preventDefault();if(requestBusy)return;
+      const quantity=Number($('#requestQuantity').value),name=$('#requesterName').value.trim(),team=$('#requesterTeam').value.trim(),purpose=$('#requestPurpose').value.trim();
+      const item=publicStocks.find(item=>String(item.id)===requestItemId);
+      if(!item||!Number.isSafeInteger(quantity)||quantity<1||quantity>item.qty||!name||!team||!purpose){
+        $('#issueRequestError').textContent='신청자, 소속, 사용 목적과 신청 가능한 정수 수량을 확인해 주세요.';return;
+      }
+      requestBusy=true;$('#submitIssueRequest').disabled=true;$('#submitIssueRequest').textContent='신청 접수 중…';$('#issueRequestError').textContent='';
+      try{
+        if(!db)throw new Error('신청 접수 연결을 사용할 수 없습니다. 관리자에게 문의해 주세요.');
+        const {data,error}=await db.rpc('inventory_submit_request_v1',{p_request_key:requestKey,p_item_id:requestItemId,p_quantity:quantity,p_requester_name:name,p_requester_team:team,p_purpose:purpose});
+        if(error)throw error;
+        if(!data)throw new Error('접수 결과를 확인하지 못했습니다. 다시 시도해 주세요.');
+        $('#issueRequestForm').hidden=true;$('#issueRequestSuccess').hidden=false;
+        $('#issueReceipt').textContent=item.name+' '+quantity.toLocaleString()+'개 · 접수번호 '+String(data).slice(0,8)+' · 담당자 확인 후 불출됩니다.';
+        $('#issueRequestSuccess button').focus();
+        if(currentAdmin)loadIssueRequests();
+      }catch(error){
+        const code=error.code||'';
+        $('#issueRequestError').textContent=/PGRST202|42883|42501|42P01/.test(code)?'신청 접수 기능의 연결 설정이 필요합니다. 관리자에게 문의해 주세요.':(error.message||'접수에 실패했습니다. 입력 내용을 유지한 채 다시 시도해 주세요.');
+      }finally{requestBusy=false;$('#submitIssueRequest').disabled=false;$('#submitIssueRequest').textContent='불출 신청하기';}
+    });
+    async function loadIssueRequests(){
+      if(!currentAdmin)return;
+      const signedAdmin=currentAdmin;
+      $('#requestList').textContent='신청 내역을 불러오는 중입니다.';
+      try{
+        if(!db)throw new Error('공동 신청 내역은 Supabase 연결 후 사용할 수 있습니다.');
+        const {data,error}=await db.from('inventory_issue_requests').select('id,item_name,quantity,requester_name,requester_team,purpose,created_at').order('created_at',{ascending:false}).limit(100);
+        if(error)throw error;
+        if(currentAdmin!==signedAdmin)return;
+        $('#requestList').innerHTML=data?.length?data.map(row=>'<div class="request-entry"><b>'+esc(row.item_name)+' · '+Number(row.quantity).toLocaleString()+'개</b><br>'+esc(row.requester_name)+' · '+esc(row.requester_team)+'<br>'+esc(row.purpose)+'<br><span>'+esc(new Date(row.created_at).toLocaleString('ko-KR'))+' · 접수번호 '+esc(String(row.id).slice(0,8))+'</span></div>').join(''):'<p class="request-guide">접수된 불출 신청이 없습니다.</p>';
+      }catch(error){if(currentAdmin===signedAdmin)$('#requestList').textContent='신청 내역을 불러오지 못했습니다. 추가 설정 SQL 실행 여부를 확인해 주세요. '+(error.message||'');}
+    }
+    $('#monitorGrid').addEventListener('click',event=>{
+      const imageButton=event.target.closest('[data-image-id]'),requestButton=event.target.closest('[data-request-id]');
+      if(imageButton)openItemImage(imageButton.dataset.imageId);
+      if(requestButton&&!requestButton.disabled)openIssueRequest(requestButton.dataset.requestId);
+    });
+    $('#stockTable').addEventListener('click',event=>{const button=event.target.closest('[data-image-id]');if(button&&requireAdmin())openItemImage(button.dataset.imageId,true);});
+    $('#refreshPublic').addEventListener('click',loadPublicInventory);
+    $('#refreshRequests').addEventListener('click',loadIssueRequests);
+    $('#showPublic').addEventListener('click',showPublicView);
+    $('#closeLogin').addEventListener('click',()=>closeDialog('passwordModal'));
+    $('#logoutAdmin').addEventListener('click',async()=>{
+      try{
+        await syncQueue;
+        if(db){const {error}=await db.auth.signOut();if(error)throw error;}
+        currentAdmin=null;logs=[];if(cloudConfigured)stocks=[];
+        $('#requestList').textContent='';$('#logs').textContent='';
+        showPublicView();toast('로그아웃했습니다.');
+      }catch(error){toast('로그아웃에 실패했습니다. '+error.message);}
+    });
+    document.addEventListener('click',event=>{
+      const button=event.target.closest('[data-close]');if(button)closeDialog(button.dataset.close);
+      if(['imageModal','issueRequestModal','passwordModal'].includes(event.target.id))closeDialog(event.target.id);
+    });
+    document.addEventListener('keydown',event=>{
+      const modal=[...document.querySelectorAll('.modal-backdrop:not(.hidden)')].at(-1);if(!modal)return;
+      if(event.key==='Escape'&&['passwordModal','imageModal','issueRequestModal'].includes(modal.id)){event.preventDefault();closeDialog(modal.id);}
+      if(event.key==='Tab'){
+        const focusable=[...modal.querySelectorAll('button,input,select,textarea,a[href]')].filter(el=>!el.disabled&&el.getClientRects().length);
+        const first=focusable[0],last=focusable.at(-1);
+        if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
+        else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
+      }
+    });
+    // Hiding the admin view is a UI boundary; the database keeps its own authorization.
+    const adminFormIds=new Set(['transactionForm','addProductForm','thresholdForm','quantityForm','replenishmentForm','correctionForm']);
+    document.addEventListener('submit',event=>{
+      if(adminFormIds.has(event.target.id)&&!currentAdmin){event.preventDefault();event.stopImmediatePropagation();openAdminLogin();}
+    },true);
+    document.addEventListener('click',event=>{
+      if(!currentAdmin&&event.target.closest('#adminView,#correctionModal,#quantityModal,#replenishmentModal')){
+        event.preventDefault();event.stopImmediatePropagation();openAdminLogin();
+      }
+    },true);
+    if(db)db.auth.onAuthStateChange(event=>{
+      if(event==='SIGNED_OUT'){
+        currentAdmin=null;logs=[];stocks=[];
+        $('#adminView').hidden=true;$('#publicView').hidden=false;$('#resetPasswordsButton').hidden=true;
+        $('#requestList').textContent='';$('#logs').textContent='';
+        for(const id of ['correctionModal','quantityModal','replenishmentModal','imageModal'])$('#'+id).classList.add('hidden');
+      }
+    });
+    async function bootstrap(){
+      render();updateTransactionMode();setupPasswordModal();
+      $('#passwordModal').classList.add('hidden');$('#adminView').hidden=true;$('#publicView').hidden=false;
+      await loadPublicInventory();
+      setInterval(()=>{if(!document.hidden&&!$('#publicView').hidden)loadPublicInventory();},30000);
+      setInterval(()=>{if(!document.hidden&&currentAdmin&&!$('#adminView').hidden)loadIssueRequests();},30000);
+    }
+    bootstrap();
+
+
   </script>
 </body></html>
